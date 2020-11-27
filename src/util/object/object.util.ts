@@ -3,8 +3,13 @@ export function zilch(argument: unknown): boolean {
         return true;
     }
 
-    if(typeof argument === "string") {
-        return (argument as string).trim() === "";
+    switch(typeof argument) {
+        case "boolean":
+            return argument.not();
+        case "number":
+            return argument === 0;
+        case "string":
+            return (argument as string).trim() === "";
     }
 
     if(Array.isArray(argument)) {
