@@ -1,10 +1,10 @@
 {
-  "name": "ts-utils",
+  "name": "bp-ts-utils",
   "version": "1.1.0",
   "description": "Banjo's TypeScript Utilities",
   "author": "banjo OBE",
   "license": "Apache-2.0",
-  "repository": "github:benj-power/ts-utils",
+  "repository": "github:benj-power/bp-ts-utils",
   "main": "dist/index.js",
   "engines": {
     "node": ">=8",
