@@ -14,12 +14,8 @@
     "build": "rollup -c",
     "start": "rollup -c -w"
   },
-  "dependencies": {},
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-runtime": "^6.26.0",
     "rollup": "^1.29.0",
-    "rollup-plugin-sass": "^1.2.2",
     "rollup-plugin-typescript2": "^0.25.3",
     "typescript": "3.9.4"
   },
