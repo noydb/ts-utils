@@ -1,6 +1,7 @@
 # ts-utils
-
-A template for publishing a React + TypeScript package to npm
+---
+#### My own set of TypeScript utilities. Writing for merriment, practice, and future use in future projects. 
+---
 
 ### How to use
 
