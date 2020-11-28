@@ -6,6 +6,7 @@
         120
       ]
     },
+    "max-classes-per-file": false,
     "new-parens": true,
     "no-arg": true,
     "no-bitwise": true,
