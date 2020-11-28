@@ -77,7 +77,7 @@ function identicalArray(first: Array<unknown>, second: Array<unknown>): boolean 
     }
 
     const secondMatchMap: { [key: number]: boolean } = {};
-    for (let i: number = 0; i < first.length; i++) {
+    for (let i: number = 0; i < second.length; i++) {
         secondMatchMap[i] = false;
     }
 
