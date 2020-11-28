@@ -1,35 +1,23 @@
-export function identical(first: unknown, second: unknown): boolean {
+export function areIdentical(first: unknown, second: unknown): boolean {
     if (typeof first !== typeof second) {
         return false;
     }
 
     switch (typeof first) {
         case "boolean":
-            return identicalBoolean(first as boolean, second as boolean);
+            return first === second;
         case "number":
-            return identicalNumber(first as number, second as number);
+            return first === second;
         case "object":
-            return identicalObject(first as Object, second as Object);
+            return areIdenticalObjects(first as object, second as object);
         case "string":
-            return identicalString(first as string, second as string);
+            return first === second;
     }
 
     return true;
 }
 
-function identicalBoolean(first: boolean, second: boolean): boolean {
-    return first === second;
-}
-
-function identicalNumber(first: number, second: number): boolean {
-    return first === second;
-}
-
-function identicalString(first: string, second: string): boolean {
-    return first === second;
-}
-
-function identicalObject(first: Object, second: Object): boolean {
+function areIdenticalObjects(first: object, second: object): boolean {
     const firstKeys: string[] = Object.keys(first).sort();
     const secondKeys: string[] = Object.keys(second).sort();
 
@@ -47,7 +35,7 @@ function identicalObject(first: Object, second: Object): boolean {
             return identicalArray(firstValue, secondValue);
         }
 
-        if (!identical(firstValue, secondValue)) {
+        if (!areIdentical(firstValue, secondValue)) {
             return false;
         }
     }
@@ -55,17 +43,17 @@ function identicalObject(first: Object, second: Object): boolean {
     return true;
 }
 
-function identicalArray(first: Array<unknown>, second: Array<unknown>): boolean {
-    if (zilch(first) && zilch(second)) {
+function identicalArray(first: unknown[], second: unknown[]): boolean {
+    if (isZilch(first) && isZilch(second)) {
         return true;
     }
 
     if (typeof first[0] !== "object") {
-        const firstSorted: Array<unknown> = first.sort();
-        const secondSorted: Array<unknown> = first.sort();
+        const firstSorted: unknown[] = first.sort();
+        const secondSorted: unknown[] = first.sort();
 
         for (let i = 0; i < firstSorted.length; i++) {
-            if (!identical(firstSorted[i], secondSorted[i])) {
+            if (!areIdentical(firstSorted[i], secondSorted[i])) {
                 return false;
             }
         }
@@ -81,9 +69,9 @@ function identicalArray(first: Array<unknown>, second: Array<unknown>): boolean 
         secondMatchMap[i] = false;
     }
 
-    for (let firstObj of first) {
-        for (let secondObj of second) {
-            if (identical(firstObj, secondObj)) {
+    for (const firstObj of first) {
+        for (const secondObj of second) {
+            if (areIdentical(firstObj, secondObj)) {
 
                 firstMatchMap[first.indexOf(firstObj)] = true;
                 secondMatchMap[second.indexOf(secondObj)] = true;
@@ -106,7 +94,7 @@ function identicalArray(first: Array<unknown>, second: Array<unknown>): boolean 
     return true;
 }
 
-export function zilch(argument: unknown): boolean {
+export function isZilch(argument: unknown): boolean {
     if (argument === undefined || argument === null) {
         return true;
     }

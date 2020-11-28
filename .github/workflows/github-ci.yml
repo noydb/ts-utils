@@ -1,0 +1,36 @@
+name: BP TypeScript Utilities CI
+
+on:
+  push:
+    branches:
+      # hyphen indicates list item
+      - master
+      - develop
+      - feature/*
+jobs:
+  lint:
+    name: lint
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: |
+          npm ci
+          npm run lint
+  test:
+    name: test
+    needs: lint
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: |
+          npm ci
+          npm test
+  build:
+    name: build
+    needs: [ lint, test ]
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: |
+          npm ci
+          npm run build
