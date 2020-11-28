@@ -8,30 +8,38 @@ on:
       - develop
       - feature/*
 jobs:
-  install:
-    name: install
+  ci:
+    name: ci
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v1
-      - run: npm install
-  #  lint:
-  #    name: lint
-  #    runs-on: windows-latest
-  #    steps:
-  #      - uses: actions/checkout@v1
-  #      - run: npm run lint
+      - run: npm ci
+  lint:
+    name: lint
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: |
+          echo "Linting all files with .ts file extension"
+          npm ci
+          npm run lint
   test:
     name: test
-#    needs: lint
+    needs: lint
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v1
-      - run: npm test
+      - run: |
+          echo "Running all unit tests"
+          npm ci
+          npm test
   build:
     name: build
-    #    needs: [ lint, test ]
-    needs: [ test ]
+    needs: [ lint, test ]
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v1
-      - run: npm run build
+      - run: |
+          echo "Building application"
+          npm ci
+          npm run build
