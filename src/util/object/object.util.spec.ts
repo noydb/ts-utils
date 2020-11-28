@@ -55,8 +55,6 @@ describe("object util", () => {
             describe("array test #", () => {
                 it.each([[1], [50], [100], [250], [500], [1000]])
                 ("%b", (given: number) => {
-                    console.log(Mocks.getPerson(given));
-
                     const mock: Person = Mocks.getPerson(given);
 
                     expect(areIdentical(mock, mock)).toBeTruthy();

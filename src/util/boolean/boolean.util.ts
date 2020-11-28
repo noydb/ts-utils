@@ -7,6 +7,6 @@ declare global {
     }
 }
 
-Boolean.prototype.not = function() {
+Boolean.prototype.not = function(): boolean {
     return !this;
 };
