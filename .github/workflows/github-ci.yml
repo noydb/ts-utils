@@ -8,6 +8,12 @@ on:
       - develop
       - feature/*
 jobs:
+  install:
+    name: install
+      runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: npm install
   lint:
     name: lint
     runs-on: windows-latest
