@@ -1,8 +1,9 @@
 import { areIdentical, isZilch } from "./object.util";
 import { Person } from "../../mock/person.interface";
+import { Mocks } from "./test/large.mock.data";
 
 describe("object util", () => {
-    describe("zilch", () => {
+    describe("isZilch", () => {
         it("should return true", () => {
             const result: boolean = isZilch(undefined);
 
@@ -10,30 +11,57 @@ describe("object util", () => {
         });
     });
 
-    describe("identical", () => {
-        it("should return true", () => {
-            const result: boolean = areIdentical(PersonAMocks.BASE, PersonAMocks.MATCH_ONE);
+    describe("areIdentical", () => {
+        describe("will return false #", () => {
+            it("1", () => {
+                const result: boolean = areIdentical(PersonAMocks.BASE, PersonAMocks.FAIL_ONE);
 
-            expect(result).toBeTruthy();
+                expect(result).toBeFalsy();
+            });
+
+            it("2", () => {
+                const result: boolean = areIdentical(undefined, null);
+
+                expect(result).toBeFalsy();
+            });
+
+            // TODO: fix
+            xit("3", () => {
+                const result: boolean = areIdentical(PersonBMocks.BASE, PersonBMocks.FAIL_ONE);
+
+                expect(result).toBeFalsy();
+            });
+
+            it("4", () => {
+                const result: boolean = areIdentical({}, { b: 1 });
+
+                expect(result).toBeFalsy();
+            });
         });
 
-        it("should return false", () => {
-            const result: boolean = areIdentical(PersonAMocks.BASE, PersonAMocks.FAIL_ONE);
+        describe("will return true ", () => {
+            it("#1", () => {
+                const result: boolean = areIdentical(PersonAMocks.BASE, PersonAMocks.MATCH_ONE);
 
-            expect(result).toBeFalsy();
-        });
+                expect(result).toBeTruthy();
+            });
 
-        it("should return true", () => {
-            const result: boolean = areIdentical(PersonBMocks.BASE, PersonBMocks.MATCH_ONE);
+            it("#2", () => {
+                const result: boolean = areIdentical(PersonBMocks.BASE, PersonBMocks.MATCH_ONE);
 
-            expect(result).toBeTruthy();
-        });
+                expect(result).toBeTruthy();
+            });
 
-        // TODO: fix
-        xit("should return false", () => {
-            const result: boolean = areIdentical(PersonBMocks.BASE, PersonBMocks.FAIL_ONE);
+            describe("array test #", () => {
+                it.each([[1], [50], [100], [250], [500], [1000]])
+                ("%b", (given: number) => {
+                    console.log(Mocks.getPerson(given));
 
-            expect(result).toBeFalsy();
+                    const mock: Person = Mocks.getPerson(given);
+
+                    expect(areIdentical(mock, mock)).toBeTruthy();
+                });
+            });
         });
     });
 });

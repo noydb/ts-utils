@@ -22,7 +22,12 @@
         "timeEnd",
         "trace"
       ]
-    }
+    },
+    "typedef": [
+      true,
+      "call-signature",
+      "property-declaration"
+    ]
   },
   "jsRules": {
     "max-line-length": {
