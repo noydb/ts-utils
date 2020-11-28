@@ -7,6 +7,6 @@ declare global {
     }
 }
 
-Array.prototype.isEmpty = function () {
+Array.prototype.isEmpty = function() {
     return 0 === this.length;
 };
