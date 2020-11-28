@@ -14,12 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - run: npm install
-  lint:
-    name: lint
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v1
-      - run: npm run lint
+  #  lint:
+  #    name: lint
+  #    runs-on: windows-latest
+  #    steps:
+  #      - uses: actions/checkout@v1
+  #      - run: npm run lint
   test:
     name: test
     needs: lint
@@ -29,7 +29,8 @@ jobs:
       - run: npm test
   build:
     name: build
-    needs: [ lint, test ]
+    #    needs: [ lint, test ]
+    needs: [ test ]
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v1
