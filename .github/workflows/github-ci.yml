@@ -11,17 +11,16 @@ jobs:
     name: lint
     runs-on: windows-latest
     steps:
-      run: |
-        npm lint
+      run: npm lint
   test:
     name: test
     needs: lint
     runs-on: windows-latest
     steps:
-      run: echo running unit tests; npm test
+      run: npm test
   build:
     name: build
     needs: [ lint, test ]
     runs-on: windows-latest
     steps:
-      run: echo running build; npm run build
+      run: npm run build
