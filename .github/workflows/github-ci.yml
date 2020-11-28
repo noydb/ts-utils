@@ -12,7 +12,7 @@ jobs:
     name: lint
     runs-on: windows-latest
     steps:
-      - run: npm lint
+      - run: npm run lint
   test:
     name: test
     needs: lint
