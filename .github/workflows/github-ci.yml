@@ -8,35 +8,35 @@ on:
       - develop
       - feature/*
 jobs:
-  lint:
-    name: lint
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v1
-      - run: |
-          npm ci
-          npm run lint
-  test:
-    name: test
-    needs: lint
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v1
-      - run: |
-          npm ci
-          npm test
-  build:
-    name: build
-    needs: [ lint, test ]
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v1
-      - run: |
-          npm ci
-          npm run build
+#   lint:
+#     name: lint
+#     runs-on: windows-latest
+#     steps:
+#       - uses: actions/checkout@v1
+#       - run: |
+#           npm ci
+#           npm run lint
+#   test:
+#     name: test
+#     needs: lint
+#     runs-on: windows-latest
+#     steps:
+#       - uses: actions/checkout@v1
+#       - run: |
+#           npm ci
+#           npm test
+#   build:
+#     name: build
+#     needs: [ lint, test ]
+#     runs-on: windows-latest
+#     steps:
+#       - uses: actions/checkout@v1
+#       - run: |
+#           npm ci
+#           npm run build
   publish:
     runs-on: windows-latest
-    needs: build
+#     needs: build
     if: github.ref == 'refs/heads/develop'
     steps:
       - uses: actions/checkout@v1
@@ -45,13 +45,13 @@ jobs:
           node-version: 10
       - run: |
           npm install
-          if: contains(github.event.head_commit.message, 'MAJOR')
+          if: contains(github.event.head_commit.message, MAJOR)
             echo Upgrading Major (1.x.x) Version
             npm version major
-          if: contains(github.event.head_commit.message, 'MINOR')
+          if: contains(github.event.head_commit.message, MINOR)
             echo Upgrading Minor (x.1.x) Version
             npm version minor
-          if: contains(github.event.head_commit.message, 'PATCH')
+          if: contains(github.event.head_commit.message, PATCH)
             echo Patch/Bug Fix (x.x.1)
             npm version patch
           echo Building and Publishing
