@@ -13,6 +13,5 @@ export default {
       strict: false
     }
   ],
-  plugins: [typescript()],
-  external: ['react', 'react-dom']
+  plugins: [typescript()]
 }
