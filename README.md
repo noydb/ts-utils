@@ -1,7 +1,3 @@
-<p align="center">
-  <a href="https://github.com/benj-power/ts-utils"><img alt="pipeline status" src="https://github.com/benj-power/ts-utils/workflows/test-local/badge.svg"></a>
-</p>
-
 # ts-utils
 A library of utilities to be used with TypeScript. I appreciate the established and efficacious utility
 libraries out there for both TypeScript and JavaScript. This package will mostly remain unused by the
