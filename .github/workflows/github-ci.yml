@@ -36,7 +36,7 @@ jobs:
 #          npm run build
   publish-major:
     runs-on: windows-latest
-    needs: build
+#     needs: build
     if: github.ref == 'refs/heads/develop' && contains(github.event.head_commit.message, 'MAJOR')
     steps:
       - uses: actions/checkout@v1
@@ -54,7 +54,7 @@ jobs:
           token: '829c99a9-3408-47de-86cb-6ee18501827c'
   publish-minor:
     runs-on: windows-latest
-    needs: build
+#     needs: build
     if: github.ref == 'refs/heads/develop' && contains(github.event.head_commit.message, 'MINOR')
     steps:
       - uses: actions/checkout@v1
@@ -72,7 +72,7 @@ jobs:
           token: '829c99a9-3408-47de-86cb-6ee18501827c'
   publish-patch:
     runs-on: windows-latest
-    needs: build
+#     needs: build
     if: github.ref == 'refs/heads/develop' && contains(github.event.head_commit.message, 'PATCH')
     steps:
       - uses: actions/checkout@v1
