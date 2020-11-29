@@ -46,14 +46,14 @@ jobs:
       - run: |
           npm install
           if: contains(github.event.head_commit.message, 'MAJOR')
-          echo Upgrading Major (1.x.x) Version
-          npm version major
+            echo Upgrading Major (1.x.x) Version
+            npm version major
           if: contains(github.event.head_commit.message, 'MINOR')
-          echo Upgrading Minor (x.1.x) Version
-          npm version minor
+            echo Upgrading Minor (x.1.x) Version
+            npm version minor
           if: contains(github.event.head_commit.message, 'PATCH')
-          echo Patch/Bug Fix (x.x.1)
-          npm version patch
+            echo Patch/Bug Fix (x.x.1)
+            npm version patch
           echo Building and Publishing
           npm run build
       - uses: JS-DevTools/npm-publish@v1
