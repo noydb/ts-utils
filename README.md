@@ -6,7 +6,7 @@ groundbreaking utilities, so it follows that I find the following worthy of expl
 writing out of practice, and merriment; working on this project brings me jubilation.
  
 **NOTE: I advise against the usage of this library in any serious codebase. Use other established
-libraries for your safety and my sanity.**   
+libraries for your safety and my sanity.**    
 
 ### Releasing to NPM Registry
 - `npm run lint`
