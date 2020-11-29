@@ -41,11 +41,13 @@ jobs:
     if: github.ref == 'refs/heads/develop' && contains(github.event.head_commit.message, 'MAJOR')
     steps:
       - uses: actions/checkout@v1
-      - run: npm ci
       - uses: actions/setup-node@v1
         with:
           node-version: 10
       - run: |
+          npm ci
+          git config user.email "benjip44@gmail.com"
+          git config user.name "benj"
           npm version major
           npm run build
       - uses: JS-DevTools/npm-publish@v1
@@ -63,6 +65,8 @@ jobs:
           node-version: 10
       - run: |
           npm ci
+          git config user.email "benjip44@gmail.com"
+          git config user.name "benj"
           npm version minor
           npm run build
       - uses: JS-DevTools/npm-publish@v1
@@ -80,6 +84,8 @@ jobs:
           node-version: 10
       - run: |
           npm ci
+          git config user.email "benjip44@gmail.com"
+          git config user.name "benj"
           npm version patch
           npm run build
       - uses: JS-DevTools/npm-publish@v1
