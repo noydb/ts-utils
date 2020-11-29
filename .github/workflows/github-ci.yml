@@ -44,7 +44,7 @@ jobs:
         with:
           node-version: 10
       - run: |
-          npm install
+          npm ci
           echo Upgrading Major Version
           npm version major
           echo Building and Publishing
@@ -62,7 +62,7 @@ jobs:
         with:
           node-version: 10
       - run: |
-          npm install
+          npm ci
           echo Upgrading Minor Version
           npm version minor
           echo Building and Publishing
@@ -80,7 +80,7 @@ jobs:
         with:
           node-version: 10
       - run: |
-          npm install
+          npm ci
           echo Patch/Bug Fix
           npm version patch
           echo Building and Publishing
