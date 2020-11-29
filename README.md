@@ -18,10 +18,5 @@ patch (x.x.1)_
 - [View release on registry](https://www.npmjs.com/package/bp-ts-utils?activeTab=versions)
 
 ### Links:
-- https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
 - https://github.com/benj-power/ts-utils
 - https://www.npmjs.com/package/bp-ts-utils
-- https://blog.logrocket.com/the-complete-guide-to-publishing-a-react-package-to-npm/
-- https://docs.npmjs.com/about-semantic-versioning
-- https://rollupjs.org/guide/en/
-- https://www.typescriptlang.org/docs/handbook/release-notes/typescript-1-8.html#augmenting-globalmodule-scope-from-modules
