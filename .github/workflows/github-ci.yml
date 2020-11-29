@@ -48,4 +48,4 @@ jobs:
           npm run build
       - uses: JS-DevTools/npm-publish@v1
         with:
-          token: ${{ 829c99a9-3408-47de-86cb-6ee18501827c }}
+          token: '829c99a9-3408-47de-86cb-6ee18501827c'
