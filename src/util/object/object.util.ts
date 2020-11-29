@@ -21,6 +21,10 @@ function areIdenticalObjects(first: object, second: object): boolean {
     const firstKeys: string[] = Object.keys(first).sort();
     const secondKeys: string[] = Object.keys(second).sort();
 
+    if (firstKeys.length !== secondKeys.length) {
+        return false;
+    }
+
     for (let i = 0; i < firstKeys.length; i++) {
         if (firstKeys[i] !== secondKeys[i]) {
             return false;
@@ -113,4 +117,12 @@ export function isZilch(argument: unknown): boolean {
     }
 
     return false;
+}
+
+export function isUndefined(argument: unknown): boolean {
+    return argument === undefined;
+}
+
+export function isNull(argument: unknown): boolean {
+    return argument === null;
 }

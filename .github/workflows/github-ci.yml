@@ -34,3 +34,18 @@ jobs:
       - run: |
           npm ci
           npm run build
+  publish:
+    runs-on: windows-latest
+    needs: build
+    if: github.ref == 'refs/heads/develop'
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - run: |
+          npm install
+          npm run build
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: '829c99a9-3408-47de-86cb-6ee18501827c'
