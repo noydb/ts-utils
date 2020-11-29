@@ -49,6 +49,7 @@ jobs:
           git config user.email "benjip44@gmail.com"
           git config user.name "benj"
           npm version major
+          git push -f
           npm run build
       - uses: JS-DevTools/npm-publish@v1
         with:
@@ -68,6 +69,7 @@ jobs:
           git config user.email "benjip44@gmail.com"
           git config user.name "benj"
           npm version minor
+          git push -f
           npm run build
       - uses: JS-DevTools/npm-publish@v1
         with:
@@ -87,6 +89,7 @@ jobs:
           git config user.email "benjip44@gmail.com"
           git config user.name "benj"
           npm version patch
+          git push -f
           npm run build
       - uses: JS-DevTools/npm-publish@v1
         with:
