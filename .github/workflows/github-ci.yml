@@ -39,11 +39,11 @@ jobs:
     if: github.ref == 'refs/heads/develop' && contains(github.event.head_commit.message, 'MAJOR')
     steps:
       - uses: actions/checkout@v1
+      - run: npm ci
       - uses: actions/setup-node@v1
         with:
           node-version: 10
       - run: |
-          npm ci
           npm version major
           npm run build
       - uses: JS-DevTools/npm-publish@v1
