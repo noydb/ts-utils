@@ -45,9 +45,7 @@ jobs:
           node-version: 10
       - run: |
           npm ci
-          echo Upgrading Major Version
           npm version major
-          echo Building and Publishing
           npm run build
       - uses: JS-DevTools/npm-publish@v1
         with:
@@ -63,9 +61,7 @@ jobs:
           node-version: 10
       - run: |
           npm ci
-          echo Upgrading Minor Version
           npm version minor
-          echo Building and Publishing
           npm run build
       - uses: JS-DevTools/npm-publish@v1
         with:
@@ -81,9 +77,7 @@ jobs:
           node-version: 10
       - run: |
           npm ci
-          echo Patch/Bug Fix
           npm version patch
-          echo Building and Publishing
           npm run build
       - uses: JS-DevTools/npm-publish@v1
         with:

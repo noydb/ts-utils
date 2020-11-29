@@ -5,8 +5,8 @@ public/audience - with majority usage coming from my personal projects. I am not
 groundbreaking utilities, so it follows that I find the following worthy of explicit mention: I am
 writing out of practice, and merriment; working on this project brings me jubilation.
  
-*NOTE: I advise against the usage of this library in any serious codebase. Use other established
-libraries for your safety and my sanity.*   
+**NOTE: I advise against the usage of this library in any serious codebase. Use other established
+libraries for your safety and my sanity.**   
 
 ### Releasing to NPM Registry
 - `npm run lint`
