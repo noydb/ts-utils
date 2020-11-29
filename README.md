@@ -1,4 +1,4 @@
-# bp-ts-utils
+# ts-utils
 A library of utilities to be used with TypeScript. I think it is marvellous there are so many
 useful libraries out there for TypeScript and JavaScript. This package is likely to go unused - that
 is, by the public/audience - apart from on personal projects and (hopefully) a few projects
