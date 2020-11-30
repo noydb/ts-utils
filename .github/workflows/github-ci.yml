@@ -46,11 +46,13 @@ jobs:
     - name: Bump Version
       run: |
         npm ci
+        git config --local user.email "benjip44@gmail.com"
+        git config --local user.name "name"
         if ("${{ github.event.head_commit.message }}".Contains("MAJOR")) {npm version major}
         if ("${{ github.event.head_commit.message }}".Contains("MINOR")) {npm version minor}
         if ("${{ github.event.head_commit.message }}".Contains("PATCH")) {npm version patch}
         npm run build
-    - name: Push updated version tag to develop
+    - name: Push Changes
       uses: ad-m/github-push-action@v0.6.0
       with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
