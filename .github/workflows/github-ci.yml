@@ -47,12 +47,12 @@ jobs:
     - name: Bump Version
       run: | 
         npm ci
-        if: contains(github.event.head_commit.message, 'MAJOR')
+        if: contains(${{ github.event.head_commit.message }}, 'MAJOR')
         npm version major
-        if: contains(github.event.head_commit.message, 'MINOR')
+        if: contains(${{ github.event.head_commit.message }}, 'MINOR')
         echo Upgrading Minor (x.1.x) Version
         npm version minor
-        if: contains(github.event.head_commit.message, 'PATCH')
+        if: contains(${{ github.event.head_commit.message }}, 'PATCH')
         npm version patch
         npm run build
     - name: Push updated version tag to develop
