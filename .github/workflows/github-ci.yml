@@ -46,7 +46,6 @@ jobs:
     - name: Bump Version
       run: | 
         npm ci
-        if 
         if (not x%${{ github.event.head_commit.message }}:MAJOR=%==x%${{ github.event.head_commit.message }}%) (npm version major)
         if (not x%${{ github.event.head_commit.message }}:MINOR=%==x%${{ github.event.head_commit.message }}%) (npm version minor)
         if (not x%${{ github.event.head_commit.message }}:MAJOR=%==x%${{ github.event.head_commit.message }}%) (npm version patch)
