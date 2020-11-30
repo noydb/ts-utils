@@ -46,9 +46,9 @@ jobs:
     - name: Bump Version
       run: | 
         npm ci
-        if (not x%${{ github.event.head_commit.message }}:MAJOR=%==x%${{ github.event.head_commit.message }}%) npm version major
-        if (not x%${{ github.event.head_commit.message }}:MINOR=%==x%${{ github.event.head_commit.message }}%) npm version minor
-        if (not x%${{ github.event.head_commit.message }}:MAJOR=%==x%${{ github.event.head_commit.message }}%) npm version patch
+        if (not x%${{ github.event.head_commit.message }}:MAJOR=%==x%${{ github.event.head_commit.message }}%) {npm version major}
+        if (not x%${{ github.event.head_commit.message }}:MINOR=%==x%${{ github.event.head_commit.message }}%) {npm version minor}
+        if (not x%${{ github.event.head_commit.message }}:MAJOR=%==x%${{ github.event.head_commit.message }}%) {npm version patch}
         npm run build
     - name: Push updated version tag to develop
       uses: ad-m/github-push-action@v0.6.0
