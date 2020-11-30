@@ -41,14 +41,14 @@ jobs:
     if: github.ref == 'refs/heads/develop'
     steps:
     - uses: actions/checkout@v1
-      with: 
+      with:
         fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
     - name: Bump Version
-      run: | 
+      run: |
         npm ci
-        if (not x%${{ github.event.head_commit.message }}:MAJOR=%==x%${{ github.event.head_commit.message }}%) {npm version major}
-        if (not x%${{ github.event.head_commit.message }}:MINOR=%==x%${{ github.event.head_commit.message }}%) {npm version minor}
-        if (not x%${{ github.event.head_commit.message }}:MAJOR=%==x%${{ github.event.head_commit.message }}%) {npm version patch}
+        if (-Not (x%${{ github.event.head_commit.message }}:MAJOR=%==x%${{ github.event.head_commit.message }}%)) {npm version major}
+        if (-Not (x%${{ github.event.head_commit.message }}:MINOR=%==x%${{ github.event.head_commit.message }}%)) {npm version minor}
+        if (-Not (x%${{ github.event.head_commit.message }}:MAJOR=%==x%${{ github.event.head_commit.message }}%)) {npm version patch}
         npm run build
     - name: Push updated version tag to develop
       uses: ad-m/github-push-action@v0.6.0
