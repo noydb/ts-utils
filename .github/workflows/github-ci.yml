@@ -40,32 +40,31 @@ jobs:
     runs-on: windows-latest
     if: github.ref == 'refs/heads/develop'
     steps:
-      - uses: actions/checkout@develop
-        with: 
-          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
-      - name: Bump Version
-        run: | 
-          npm ci
-          if: contains(github.event.head_commit.message, 'MAJOR')
-          echo Upgrading Major (1.x.x) Version
-          npm version major
-          if: contains(github.event.head_commit.message, 'MINOR')
-          echo Upgrading Minor (x.1.x) Version
-          npm version minor
-          if: contains(github.event.head_commit.message, 'PATCH')
-          npm version patch
-          npm run build
-      - name: Push updated version tag to develop
-        uses: ad-m/github-push-action@develop
-        with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            branch: ${{ github.ref }}
-      - name: Setup Node
-        uses: actions/setup-node@v1
-        with:
-            node-version: 10
-      - name: Publish to NPM Registry
-      - uses: JS-DevTools/npm-publish@v1
-        with:
-          token: '829c99a9-3408-47de-86cb-6ee18501827c'
+    - uses: actions/checkout@develop
+      with: 
+        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+    - name: Bump Version
+      run: | 
+        npm ci
+        if: contains(github.event.head_commit.message, 'MAJOR')
+        npm version major
+        if: contains(github.event.head_commit.message, 'MINOR')
+        echo Upgrading Minor (x.1.x) Version
+        npm version minor
+        if: contains(github.event.head_commit.message, 'PATCH')
+        npm version patch
+        npm run build
+    - name: Push updated version tag to develop
+      uses: ad-m/github-push-action@develop
+      with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+          node-version: 10
+    - name: Publish to NPM Registry
+      uses: JS-DevTools/npm-publish@v1
+      with:
+        token: '829c99a9-3408-47de-86cb-6ee18501827c'
