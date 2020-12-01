@@ -1,6 +1,6 @@
 # ts-utils
 A library of utilities to be used with TypeScript. I appreciate the established and efficacious utility
-libraries out there for both TypeScript and JavaScript. This package will mostly remain unused by the
+libraries out there for both TypeScript and JavaScript so I wanted to contribute my own. This package will mostly remain unused by the
 public/audience - with majority usage coming from my personal projects. I am not writing any
 groundbreaking utilities, so it follows that I find the following worthy of explicit mention: I am
 writing out of practice, and merriment; working on this project brings me jubilation.
