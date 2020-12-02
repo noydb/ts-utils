@@ -48,9 +48,9 @@ jobs:
         npm ci
         git config --local user.email "benjip44@gmail.com"
         git config --local user.name "name"
-        if ("${{ github.event.head_commit.message }}".Contains("MAJOR")) {npm version major}
-        if ("${{ github.event.head_commit.message }}".Contains("MINOR")) {npm version minor}
-        if ("${{ github.event.head_commit.message }}".Contains("PATCH")) {npm version patch}
+        if ("${{ github.event.head_commit.message }}".Contains("major")) {npm version major}
+        if ("${{ github.event.head_commit.message }}".Contains("minor")) {npm version minor}
+        if ("${{ github.event.head_commit.message }}".Contains("patch")) {npm version patch}
         npm run build
     - name: Push Changes
       uses: ad-m/github-push-action@v0.6.0
