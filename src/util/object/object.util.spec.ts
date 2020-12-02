@@ -1,6 +1,5 @@
 import { areIdentical, isZilch } from "./object.util";
-import { Person } from "../../mock/person.interface";
-import { Mocks } from "./test/large.mock.data";
+import { Mocks, Person } from "../../mock/person.mock.data";
 
 describe("object util", () => {
     describe("isZilch", () => {
@@ -12,7 +11,7 @@ describe("object util", () => {
     });
 
     describe("areIdentical", () => {
-        describe("will return false #", () => {
+        describe(" will return false #", () => {
             it("1", () => {
                 const result: boolean = areIdentical(PersonAMocks.BASE, PersonAMocks.FAIL_ONE);
 
@@ -25,8 +24,7 @@ describe("object util", () => {
                 expect(result).toBeFalsy();
             });
 
-            // TODO: fix
-            xit("3", () => {
+            it("3", () => {
                 const result: boolean = areIdentical(PersonBMocks.BASE, PersonBMocks.FAIL_ONE);
 
                 expect(result).toBeFalsy();
@@ -37,9 +35,31 @@ describe("object util", () => {
 
                 expect(result).toBeFalsy();
             });
+
+            it("5", () => {
+                const result: boolean = areIdentical({}, undefined);
+
+                expect(result).toBeFalsy();
+            });
+
+            describe("array test #", () => {
+                it.each([[1], [50], [100], [250], [500], [1000]])
+                ("%b", (given: number) => {
+                    const firstMock: Person = Mocks.getPerson(given);
+                    const secondMock: Person = Mocks.getPerson(given * 2);
+
+                    expect(areIdentical(firstMock, secondMock)).toBeFalsy();
+                });
+            });
         });
 
         describe("will return true ", () => {
+            it("#1", () => {
+                const result: boolean = areIdentical(undefined, undefined);
+
+                expect(result).toBeTruthy();
+            });
+
             it("#1", () => {
                 const result: boolean = areIdentical(PersonAMocks.BASE, PersonAMocks.MATCH_ONE);
 
@@ -53,7 +73,7 @@ describe("object util", () => {
             });
 
             describe("array test #", () => {
-                it.each([[1], [50], [100], [250], [500], [1000]])
+                it.each([[1], [50], [100], [250], [500], [1000], [10000]])
                 ("%b", (given: number) => {
                     const mock: Person = Mocks.getPerson(given);
 
