@@ -52,7 +52,7 @@ function areIdenticalObjects(first: object, second: object): boolean {
 
     const firstKeysLength: number = firstKeys.length;
     for (let i = 0; i < firstKeysLength; i++) {
-        // Worth nothing: keys are always of type string. Surely a key could be a
+        // Worth noting: keys are always of type string. Surely a key could be a
         // number? we are doing this because our core comparison logic relies on
         // the keys in both lists being ordered identically - the objects are
         // compared side-by-side, so to say.
@@ -85,7 +85,7 @@ function areIdenticalObjects(first: object, second: object): boolean {
 /**
  * Returns true if the values of the two specified arrays are identical - that is,
  * every element belonging to argument 'first', has a corresponding identical
- * element in argument 'second'.
+ * element belonging to argument 'second'.
  *
  * TODO: provide code examples of true and false results.
  * TODO: Elaborate further on logic, if possible.
@@ -143,8 +143,9 @@ export function isZilch(areUZilch: unknown): boolean {
 
     switch (typeof areUZilch) {
         case "boolean":
-            return areUZilch.not();
+            return !areUZilch;
         case "string":
+            // === "" or .isEmpty()?
             return (areUZilch as string).trim() === "";
     }
 
@@ -161,9 +162,9 @@ export function isUndefined(argument: unknown): boolean {
 }
 
 /**
- * Returns true if the value of the specified argument is undefined.
+ * Returns true if the value of the specified argument is null.
  *
- * @param argument are you undefined?
+ * @param argument are you null?
  */
 export function isNull(argument: unknown): boolean {
     return argument === null;
@@ -179,7 +180,7 @@ export function isNullOrUndefined(argument: unknown): boolean {
 }
 
 /**
- * We have isNaN, how come we do not have isANumber?
+ * We have isNaN, why do we not have isANumber?
  *
  * @param argument are you not not a (!isNaN...) number?
  */
