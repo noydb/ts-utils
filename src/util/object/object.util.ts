@@ -1,6 +1,8 @@
 /**
  * TODO: write doc.
- * // how to handle object referencing itself?
+ * how to handle object referencing itself?
+ * array of arrays?
+ * functions?
  *
  * @param first to be compared against the 'second' argument for identicalness.
  * @param second to be compared against the 'second' argument for identicalness.
@@ -10,12 +12,12 @@ export function areIdentical(first: unknown, second: unknown): boolean {
         return false;
     }
 
-    const firstZilch: boolean = isZilch(first);
-    const secondZilch: boolean = isZilch(second);
+    const firstIsZilch: boolean = !first;
+    const secondIsZilch: boolean = !second;
 
-    if (firstZilch && secondZilch) {
+    if (firstIsZilch && secondIsZilch) {
         return true;
-    } else if (firstZilch || secondZilch) {
+    } else if (firstIsZilch || secondIsZilch) {
         return false;
     }
 
@@ -43,19 +45,18 @@ function areIdenticalObjects(first: object, second: object): boolean {
     let firstKeys: string[] = Object.keys(first);
     let secondKeys: string[] = Object.keys(second);
 
-    if (firstKeys.length !== secondKeys.length) {
+    const firstKeysLength: number = firstKeys.length;
+    if (firstKeysLength !== secondKeys.length) {
         return false;
     }
 
     firstKeys = firstKeys.sort();
     secondKeys = secondKeys.sort();
 
-    const firstKeysLength: number = firstKeys.length;
-    for (let i = 0; i < firstKeysLength; i++) {
-        // Worth noting: keys are always of type string. Surely a key could be a
-        // number? we are doing this because our core comparison logic relies on
+    for (let i: number = 0; i < firstKeysLength; i++) {
+        // we are doing this because our core comparison logic relies on
         // the keys in both lists being ordered identically - the objects are
-        // compared side-by-side, so to say.
+        // compared side-by-side, so to speak.
         // TODO: add this note to the doc. keep an inline comment here though.
         if (firstKeys[i] !== secondKeys[i]) {
             return false;
@@ -72,9 +73,7 @@ function areIdenticalObjects(first: object, second: object): boolean {
             if (!areIdenticalArrays) {
                 return false;
             }
-        }
-
-        if (!areIdentical(firstValue, secondValue)) {
+        } else if (!areIdentical(firstValue, secondValue)) {
             return false;
         }
     }
@@ -93,67 +92,60 @@ function areIdenticalObjects(first: object, second: object): boolean {
  * @param first to be compared with the 'second' argument for identicalness.
  * @param second to be compared with the 'first' argument for identicalness.
  */
-function identicalArray(first: unknown[], second: unknown[]): boolean {
-    const firstArgumentLength: number = first.length;
-    const secondArgumentLength: number = second.length;
+export function identicalArray(first: unknown[], second: unknown[]): boolean {
+    const length: number = first.length;
 
-    if (firstArgumentLength !== secondArgumentLength) {
+    if (length !== second.length) {
         return false;
     }
 
-    outer: for (let i: number = 0,
-                    innerI: number = 0; i < firstArgumentLength; i++) {
-        const firstObj = first[i];
+    const firstMatchers: Matcher[] = buildMatcherList(first);
+    const secondMatchers: Matcher[] = buildMatcherList(second);
 
-        while (innerI < secondArgumentLength) {
-            const secondObj: unknown = second[innerI];
+    outer: for (let i: number = 0; i < length; i++) {
+        for (let innerI: number = 0; i < length; innerI++) {
+            const firstMatcher: Matcher = firstMatchers[i];
+            const secondMatcher: Matcher = secondMatchers[innerI];
 
-            if (!areIdentical(firstObj, secondObj)) {
-                return false;
+            if (secondMatcher.isIdentical) {
+                continue;
             }
 
-            innerI += 1;
-            continue outer;
+            if (areIdentical(firstMatcher.object, secondMatcher.object)) {
+                firstMatcher.isIdentical = true;
+                secondMatcher.isIdentical = true;
+
+                continue outer;
+            }
+        }
+    }
+
+    for (let i: number = 0; i < length; i++) {
+        if (!firstMatchers[i].isIdentical) {
+            return false;
+        }
+    }
+
+    for (let i: number = 0; i < length; i++) {
+        if (!secondMatchers[i].isIdentical) {
+            return false;
         }
     }
 
     return true;
 }
 
-/**
- * Would this function cover all the cases of the function immediately below it
- * (#isZilch)? If so, deprecate #isZilch, or change its logic to this function's.
- *
- * @param argument are you nothing?
- */
-export function isZilchXPERIMENT(argument: unknown): boolean {
-    // duh?
-    return !!argument;
-}
+const buildMatcherList = (array: unknown[]): Matcher[] => {
+    return array.map((object: unknown) =>
+        ({
+            object,
+            isIdentical: false
+        })
+    );
+};
 
 /**
- * Returns true if the value of the specified argument is Nothing.
- *
- * @param areUZilch are you nothing?
- */
-export function isZilch(areUZilch: unknown): boolean {
-    if (areUZilch === undefined || areUZilch === null) {
-        return true;
-    }
-
-    switch (typeof areUZilch) {
-        case "boolean":
-            return !areUZilch;
-        case "string":
-            // === "" or .isEmpty()?
-            return (areUZilch as string).trim() === "";
-    }
-
-    return false;
-}
-
-/**
- * Returns true if the value of specified argument is undefined.
+ * Returns true if the value of the specified argument is undefined.
  *
  * @param argument are you undefined?
  */
@@ -186,4 +178,9 @@ export function isNullOrUndefined(argument: unknown): boolean {
  */
 export function isANumber(argument: unknown): boolean {
     return typeof argument === "number";
+}
+
+interface Matcher {
+    object: unknown;
+    isIdentical: boolean;
 }

@@ -3,19 +3,16 @@ export {};
 
 declare global {
     interface Object {
-        isOfType<T>(v: any): boolean;
+        type<T>():
+            "bigint" | "boolean" | "function" | "number" |
+            "object" | "string" | "symbol" | "undefined";
     }
 }
 
 /**
- * Returns true if the type of 'this' is equal to the value of the specified
- * arguments. I prefer this to
- * ```
- * typeof <x> === '...'
- * ```
- *
- * @param argument used to compare against 'this' and its type.
+ * Returns type of 'this'
  */
-Object.prototype.isOfType = function(argument: string): boolean {
-    return typeof this === argument;
+Object.prototype.type = function(): "bigint" | "boolean" | "function" | "number" |
+    "object" | "string" | "symbol" | "undefined" {
+    return typeof this;
 };
