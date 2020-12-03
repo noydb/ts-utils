@@ -1,6 +1,6 @@
 {
   "name": "bp-ts-utils",
-  "version": "1.12.0",
+  "version": "2.0.0",
   "description": "Banjo's TypeScript Utilities",
   "author": "banjo OBE",
   "license": "Apache-2.0",
