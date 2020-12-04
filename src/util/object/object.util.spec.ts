@@ -1,5 +1,5 @@
-import { areIdentical } from "./object.util";
 import { Mocks, Person } from "../../mock/person.mock.data";
+import { areIdentical } from "./object.util";
 
 describe("object util", () => {
 

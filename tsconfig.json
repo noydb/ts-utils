@@ -32,6 +32,7 @@
     "dist",
     "example",
     "rollup.config.js",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "src/mock/**"
   ]
 }

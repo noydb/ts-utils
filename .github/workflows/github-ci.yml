@@ -64,4 +64,4 @@ jobs:
     - name: Publish to NPM Registry
       uses: JS-DevTools/npm-publish@v1
       with:
-        token: '829c99a9-3408-47de-86cb-6ee18501827c'
+        token: ${{ secrets.NPM_TOKEN }}
