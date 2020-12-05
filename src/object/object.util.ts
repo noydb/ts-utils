@@ -1,6 +1,7 @@
 /**
  * Returns true if the values of the specified 'first' & 'second argument' are
- * identical - that is, similar in every detail; exactly like.
+ * identical - that is, similar in every detail; exactly like. Keys are ordered
+ * for each object and the values corresponding to said keys are then compared.
  *
  * Considerations for this utility:
  * Handling an object that references itself?
@@ -10,28 +11,21 @@
  * @param first to be compared against the 'second' argument for identicalness.
  * @param second to be compared against the 'second' argument for identicalness.
  */
-export function areIdentical(first: unknown, second: unknown): boolean {
-    if (typeof first !== typeof second) {
-        return false;
-    }
-
-    const firstIsZilch: boolean = !first;
-    const secondIsZilch: boolean = !second;
-
-    if (firstIsZilch && secondIsZilch) {
-        return true;
-    } else if (firstIsZilch || secondIsZilch) {
-        return false;
-    }
-
+export function areIdentical<T>(first: T, second: T): boolean {
     switch (typeof first) {
         case "boolean":
             return first === second;
         case "number":
             return first === second;
         case "object":
-            return areIdenticalObjects(first as object, second as object);
+            if (isNullOrUndefined(second)) {
+                return false;
+            }
+
+            return areIdenticalObjects(first, second);
         case "string":
+            return first === second;
+        case "undefined":
             return first === second;
     }
 
@@ -46,36 +40,23 @@ export function areIdentical(first: unknown, second: unknown): boolean {
  * @param first to be compared with the 'second' argument for identicalness.
  * @param second to be compared with the 'second' argument for identicalness.
  */
-function areIdenticalObjects(first: object, second: object): boolean {
-    let firstKeys: string[] = Object.keys(first);
-    let secondKeys: string[] = Object.keys(second);
+function areIdenticalObjects<T>(first: T, second: T): boolean {
+    const firstKeys: string[] = Object.keys(first).sort();
+    const secondKeys: string[] = Object.keys(second).sort();
 
     const firstKeysLength: number = firstKeys.length;
-    if (firstKeysLength !== secondKeys.length) {
+
+    if (!areKeysValid(firstKeysLength, firstKeys, secondKeys)) {
         return false;
-    }
-
-    firstKeys = firstKeys.sort();
-    secondKeys = secondKeys.sort();
-
-    for (let i: number = 0 ; i < firstKeysLength ; i++) {
-        // we are doing this because our core comparison logic relies on
-        // the keys in both lists being ordered identically - the objects are
-        // compared side-by-side, so to speak.
-        // TODO: add this note to the doc. keep an inline comment here though.
-        if (firstKeys[i] !== secondKeys[i]) {
-            return false;
-        }
     }
 
     for (let i: number = 0 ; i < firstKeysLength ; i++) {
         const key: string = firstKeys[i];
-        const firstValue: unknown = first[key];
-        const secondValue: unknown = second[key];
+        const firstValue: T = first[key];
+        const secondValue: T = second[key];
 
         if (Array.isArray(firstValue) && Array.isArray(secondValue)) {
-            const areareIdenticalArrayss: boolean = areIdenticalArrays(firstValue, secondValue);
-            if (!areareIdenticalArrayss) {
+            if (!areIdenticalArrays(firstValue, secondValue)) {
                 return false;
             }
         } else if (!areIdentical(firstValue, secondValue)) {
@@ -85,6 +66,28 @@ function areIdenticalObjects(first: object, second: object): boolean {
 
     return true;
 }
+
+/**
+ * Returns true if 'firstKeys' argument is equal to 'secondKeys' argument.
+ *
+ * @param firstKeysLength used to check if the lengths are equal.
+ * @param firstKeys to be compared against 'secondKeys'
+ * @param secondKeys to be compared against 'firstKeys'
+ * @return boolean value indicating whether the specified Arrays (keys) are equal.
+ */
+const areKeysValid = (firstKeysLength: number, firstKeys: string[], secondKeys: string[]): boolean => {
+    if (firstKeysLength !== secondKeys.length) {
+        return false;
+    }
+
+    for (let i: number = 0 ; i < firstKeysLength ; i++) {
+        if (firstKeys[i] !== secondKeys[i]) {
+            return false;
+        }
+    }
+
+    return true;
+};
 
 /**
  * Returns true if the values of the two specified arrays are identical - that is,
@@ -97,20 +100,42 @@ function areIdenticalObjects(first: object, second: object): boolean {
  * @param first to be compared with the 'second' argument for identicalness.
  * @param second to be compared with the 'first' argument for identicalness.
  */
-export function areIdenticalArrays(first: unknown[], second: unknown[]): boolean {
+export function areIdenticalArrays<T>(first: T[], second: T[]): boolean {
     const length: number = first.length;
 
     if (length !== second.length) {
         return false;
     }
 
-    const firstMatchers: Matcher[] = buildMatcherList(first);
-    const secondMatchers: Matcher[] = buildMatcherList(second);
+    const firstMatchers: Matcher<T>[] = buildMatcherList(first);
+    const secondMatchers: Matcher<T>[] = buildMatcherList(second);
+    compareArrayElements(firstMatchers, secondMatchers, length);
 
+    return areMatchersValid(firstMatchers, secondMatchers, length);
+}
+
+const buildMatcherList = <T>(array: T[]): Matcher<T>[] => {
+    return array.map((object: T) =>
+        ({
+            object,
+            isIdentical: false
+        })
+    );
+};
+
+/**
+ * Checks if each element in 'firstMatchers' argument has a corresponding identical
+ * element in 'secondMatchers' argument.
+ *
+ * @param firstMatchers to be compared with 'secondMatchers'
+ * @param secondMatchers to be compared with 'firstMatchers'
+ * @param length for iteration & caching purposes.
+ */
+const compareArrayElements = <T>(firstMatchers: Matcher<T>[], secondMatchers: Matcher<T>[], length: number): void => {
     outer: for (let i: number = 0 ; i < length ; i++) {
         for (let innerI: number = 0 ; i < length ; innerI++) {
-            const firstMatcher: Matcher = firstMatchers[i];
-            const secondMatcher: Matcher = secondMatchers[innerI];
+            const firstMatcher: Matcher<T> = firstMatchers[i];
+            const secondMatcher: Matcher<T> = secondMatchers[innerI];
 
             if (secondMatcher.isIdentical) {
                 continue;
@@ -124,7 +149,17 @@ export function areIdenticalArrays(first: unknown[], second: unknown[]): boolean
             }
         }
     }
+};
 
+/**
+ * Returns true if all Matcher elements have a value corresponding true value for
+ * 'isIdentical' field.
+ *
+ * @param firstMatchers to be checked for validity.
+ * @param secondMatchers to be checked for validity.
+ * @param length for iteration & caching purposes.
+ */
+const areMatchersValid = <T>(firstMatchers: Matcher<T>[], secondMatchers: Matcher<T>[], length: number): boolean => {
     for (let i: number = 0 ; i < length ; i++) {
         if (!firstMatchers[i].isIdentical) {
             return false;
@@ -138,15 +173,6 @@ export function areIdenticalArrays(first: unknown[], second: unknown[]): boolean
     }
 
     return true;
-}
-
-const buildMatcherList = (array: unknown[]): Matcher[] => {
-    return array.map((object: unknown) =>
-        ({
-            object,
-            isIdentical: false
-        })
-    );
 };
 
 /**
@@ -154,7 +180,7 @@ const buildMatcherList = (array: unknown[]): Matcher[] => {
  *
  * @param argument are you undefined?
  */
-export function isUndefined(argument: unknown): boolean {
+export function isUndefined<T>(argument: T): boolean {
     return argument === undefined;
 }
 
@@ -163,7 +189,7 @@ export function isUndefined(argument: unknown): boolean {
  *
  * @param argument are you null?
  */
-export function isNull(argument: unknown): boolean {
+export function isNull<T>(argument: T): boolean {
     return argument === null;
 }
 
@@ -172,7 +198,7 @@ export function isNull(argument: unknown): boolean {
  *
  * @param argument are you null or undefined?
  */
-export function isNullOrUndefined(argument: unknown): boolean {
+export function isNullOrUndefined<T>(argument: T): boolean {
     return isUndefined(argument) || isNull(argument);
 }
 
@@ -181,11 +207,11 @@ export function isNullOrUndefined(argument: unknown): boolean {
  *
  * @param argument are you not not a (!isNaN...) number?
  */
-export function isANumber(argument: unknown): boolean {
+export function isANumber<T>(argument: T): boolean {
     return typeof argument === "number";
 }
 
-interface Matcher {
-    object: unknown;
+interface Matcher<T> {
+    object: T;
     isIdentical: boolean;
 }
