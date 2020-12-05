@@ -1,50 +1,43 @@
-import { areIdentical, isZilch } from "./object.util";
 import { Mocks, Person } from "../../mock/person.mock.data";
+import { areIdentical } from "./object.util";
 
 describe("object util", () => {
-    describe("isZilch", () => {
-        it("should return true", () => {
-            const result: boolean = isZilch(undefined);
-
-            expect(result).toBeTruthy();
-        });
-    });
 
     describe("areIdentical", () => {
-        describe(" will return false #", () => {
-            it("1", () => {
+        describe(" will return false", () => {
+            it("#1", () => {
                 const result: boolean = areIdentical(PersonAMocks.BASE, PersonAMocks.FAIL_ONE);
 
                 expect(result).toBeFalsy();
             });
 
-            it("2", () => {
+            it("#2", () => {
                 const result: boolean = areIdentical(undefined, null);
 
                 expect(result).toBeFalsy();
             });
 
-            it("3", () => {
+            it("#3", () => {
                 const result: boolean = areIdentical(PersonBMocks.BASE, PersonBMocks.FAIL_ONE);
 
                 expect(result).toBeFalsy();
             });
 
-            it("4", () => {
+            it("#4", () => {
                 const result: boolean = areIdentical({}, { b: 1 });
 
                 expect(result).toBeFalsy();
             });
 
-            it("5", () => {
+            it("#5", () => {
                 const result: boolean = areIdentical({}, undefined);
 
                 expect(result).toBeFalsy();
             });
 
-            describe("array test #", () => {
-                it.each([[1], [50], [100], [250], [500], [1000]])
-                ("%b", (given: number) => {
+            describe("#6 array test", () => {
+                it.each([[1], [50], [100], [250], [500], [1000], [10000], [50000]])
+                ("given %p children", (given: number) => {
                     const firstMock: Person = Mocks.getPerson(given);
                     const secondMock: Person = Mocks.getPerson(given * 2);
 
@@ -60,24 +53,37 @@ describe("object util", () => {
                 expect(result).toBeTruthy();
             });
 
-            it("#1", () => {
+            it("#2", () => {
                 const result: boolean = areIdentical(PersonAMocks.BASE, PersonAMocks.MATCH_ONE);
 
                 expect(result).toBeTruthy();
             });
 
-            it("#2", () => {
+            it("#3", () => {
                 const result: boolean = areIdentical(PersonBMocks.BASE, PersonBMocks.MATCH_ONE);
 
                 expect(result).toBeTruthy();
             });
 
-            describe("array test #", () => {
-                it.each([[1], [50], [100], [250], [500], [1000], [10000]])
-                ("%b", (given: number) => {
+            it("given children on objects", () => {
+                const mock: Person = Mocks.getPerson(2);
+
+                expect(areIdentical(mock, mock)).toBeTruthy();
+            });
+
+            describe("#4 - array tests ", () => {
+                it.each([[1], [50], [100], [250], [500], [1000], [10000], [50000]])
+                ("given %p children on objects", (given: number) => {
                     const mock: Person = Mocks.getPerson(given);
 
                     expect(areIdentical(mock, mock)).toBeTruthy();
+                });
+
+                it.each([[1], [50], [100], [250], [500], [1000], [10000], [50000]])
+                ("given %p children directly", (given: number) => {
+                    const mock: Person = Mocks.getPerson(given);
+
+                    expect(areIdentical(mock.children, mock.children)).toBeTruthy();
                 });
             });
         });

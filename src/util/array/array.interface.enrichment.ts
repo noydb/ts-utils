@@ -1,4 +1,7 @@
 // Ensure this is treated as a module.
+
+// import { identicalArray } from "../..";
+
 export {};
 
 declare global {
@@ -12,8 +15,14 @@ declare global {
         longerThan(array: unknown[]): boolean;
 
         shorterThan(array: unknown[]): boolean;
+
+        isIdenticalTo<T>(array: T[]): boolean;
     }
 }
+
+Array.prototype.isEmpty = function(): boolean {
+    return 0 === this.length;
+};
 
 Array.prototype.isEmpty = function(): boolean {
     return 0 === this.length;
@@ -29,8 +38,4 @@ Array.prototype.last = function(): unknown {
 
 Array.prototype.longerThan = function(array: unknown[]): boolean {
     return this.length > array.length;
-};
-
-Array.prototype.shorterThan = function(array: unknown[]): boolean {
-    return this.length < array.length;
 };

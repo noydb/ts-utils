@@ -2,7 +2,7 @@ export class Mocks {
     static getPerson(noOfChildren: number = 0): Person {
         const person: Person = Mocks.getFlatPerson(0);
 
-        for (let i = 1; i <= noOfChildren; i++) {
+        for (let i: number = 1; i <= noOfChildren; i++) {
             person.children?.push(Mocks.getChild(i));
         }
 

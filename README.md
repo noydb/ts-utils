@@ -1,13 +1,13 @@
 # ts-utils
 A library of utilities to be used with TypeScript. I appreciate the established and efficacious utility
-libraries out there for both TypeScript and JavaScript so, I wanted to make something of a contribution
-. This package will mostly remain unused by the public - with the majority of usage coming from my
- personal projects. I am not writing any groundbreaking utilities, so it follows that I find the
- following worthy of explicit mention: certain functions could be considered impractical and/or
- illogical; I am writing this library out of practice and merriment.
+libraries out there for both TypeScript and JavaScript so, I wanted to make something of a contribution. 
+This package will mostly remain unused by the public - with the majority of usage coming from my
+personal projects. I am not writing any groundbreaking utilities, so it follows that I find the
+following worthy of explicit mention: certain functions could be considered impractical and/or
+illogical; I am writing this library out of practice and merriment.
  
-**NOTE: I advise against the usage of this library in any serious codebase. Use other established
-libraries for your safety and my sanity.**    
+**NOTE: CAVEAT EMPTOR. USE ESTABLISHED LIBRARIES FOR ANY ENTERPRISE CODEBASE - FOR YOUR SAFETY AND MY
+SANITY.**    
 
 ### Releasing to NPM Registry
 - `npm run lint`
@@ -21,6 +21,6 @@ patch (x.x.1)_
 - `npm publish`
 - [View release on registry](https://www.npmjs.com/package/bp-ts-utils?activeTab=versions)
 
-### Links:
+### Links
 - https://github.com/benj-power/ts-utils
 - https://www.npmjs.com/package/bp-ts-utils
