@@ -1,3 +1,7 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/0ca7640d58873389be60/maintainability)](https://codeclimate.com/github/benj-power/ts-utils/maintainability)
+[![Known Vulnerabilities](https://snyk.io/test/github/{username}/{repo}/badge.svg)](https://snyk.io
+/test/github/benj-power/ts-utils)
+
 # ts-utils
 A library of utilities to be used with TypeScript. I appreciate the established and efficacious utility
 libraries out there for both TypeScript and JavaScript so, I wanted to make something of a contribution. 
@@ -10,10 +14,7 @@ illogical; I am writing this library out of practice and merriment.
 SANITY.**    
 
 ### Releasing to NPM Registry
-- `npm run lint`
-- `npm test`
 - `npm run build`
-- `git commit -m "...`
 - `npm version <semantic-version>`
 
 _Note: the changes made will determine the semantic version, either: major (1.x.x), minor (x.1.x), or

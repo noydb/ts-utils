@@ -1,9 +1,8 @@
-name: BP TypeScript Utilities CI
+name: ts-utils CI
 
 on:
   push:
     branches:
-      # hyphen indicates list item
       - master
       - develop
       - feature/*
@@ -34,34 +33,3 @@ jobs:
       - run: |
           npm ci
           npm run build
-  publish:
-    name: Publish to NPM Registry
-    needs: build
-    runs-on: windows-latest
-    if: github.ref == 'refs/heads/develop'
-    steps:
-    - uses: actions/checkout@v1
-      with:
-        fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
-    - name: Bump Version
-      run: |
-        npm ci
-        git config --local user.email "benjip44@gmail.com"
-        git config --local user.name "name"
-        if ("${{ github.event.head_commit.message }}".Contains("major")) {npm version major}
-        if ("${{ github.event.head_commit.message }}".Contains("minor")) {npm version minor}
-        if ("${{ github.event.head_commit.message }}".Contains("patch")) {npm version patch}
-        npm run build
-    - name: Push Changes
-      uses: ad-m/github-push-action@v0.6.0
-      with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref }}
-    - name: Setup Node
-      uses: actions/setup-node@v1
-      with:
-          node-version: 10
-    - name: Publish to NPM Registry
-      uses: JS-DevTools/npm-publish@v1
-      with:
-        token: ${{ secrets.NPM_TOKEN }}
