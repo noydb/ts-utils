@@ -1,7 +1,7 @@
 // Containing everything and anything to do with mocking values (Mostly involves
 // generating objects for the areIdentical comparator functions).
 
-/** INTERFACES **/
+/* INTERFACES */
 export interface Person {
     firstName?: string;
     lastName?: string;
@@ -14,7 +14,7 @@ export interface Address {
     streetName?: string;
 }
 
-/** GENERATOR **/
+/* GENERATOR */
 export class PersonGenerator {
     static get(noOfChildren: number = 0): Person {
         const person: Person = PersonGenerator.getFlat(0);

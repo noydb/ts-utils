@@ -68,7 +68,7 @@ declare global {
     }
 }
 
-/** IMPLEMENTATIONS **/
+/* IMPLEMENTATIONS */
 
 Array.prototype.first = function(): unknown {
     return this[0];

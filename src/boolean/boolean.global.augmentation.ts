@@ -19,7 +19,7 @@ declare global {
     }
 }
 
-/** IMPLEMENTATION **/
+/* IMPLEMENTATIONS */
 
 Boolean.prototype.not = function(): boolean {
     return !this;
