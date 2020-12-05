@@ -1,5 +1,4 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/0ca7640d58873389be60/maintainability)](https://codeclimate.com/github/benj-power/ts-utils/maintainability)
-[![Known Vulnerabilities](https://snyk.io/test/github/{username}/{repo}/badge.svg)](https://snyk.io/test/github/benj-power/ts-utils)
 
 # ts-utils
 A library of utilities to be used with TypeScript. I appreciate the established and efficacious utility
