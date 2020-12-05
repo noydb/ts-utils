@@ -1,8 +1,11 @@
 /**
- * TODO: write doc.
- * how to handle object referencing itself?
- * array of arrays?
- * functions?
+ * Returns true if the values of the specified 'first' & 'second argument' are
+ * identical - that is, similar in every detail; exactly like.
+ *
+ * Considerations for this utility:
+ * Handling an object that references itself?
+ * Comparing arrays of arrays?
+ * Comparing functions?
  *
  * @param first to be compared against the 'second' argument for identicalness.
  * @param second to be compared against the 'second' argument for identicalness.
@@ -36,7 +39,9 @@ export function areIdentical(first: unknown, second: unknown): boolean {
 }
 
 /**
- * TODO: write doc.
+ * Returns true if the specified object arguments are identical. In this case,
+ * identicalness is achieved by both arguments having the same keys and those
+ * same keys having identical corresponding values.
  *
  * @param first to be compared with the 'second' argument for identicalness.
  * @param second to be compared with the 'second' argument for identicalness.
@@ -53,7 +58,7 @@ function areIdenticalObjects(first: object, second: object): boolean {
     firstKeys = firstKeys.sort();
     secondKeys = secondKeys.sort();
 
-    for (let i: number = 0; i < firstKeysLength; i++) {
+    for (let i: number = 0 ; i < firstKeysLength ; i++) {
         // we are doing this because our core comparison logic relies on
         // the keys in both lists being ordered identically - the objects are
         // compared side-by-side, so to speak.
@@ -63,14 +68,14 @@ function areIdenticalObjects(first: object, second: object): boolean {
         }
     }
 
-    for (let i: number = 0; i < firstKeysLength; i++) {
+    for (let i: number = 0 ; i < firstKeysLength ; i++) {
         const key: string = firstKeys[i];
         const firstValue: unknown = first[key];
         const secondValue: unknown = second[key];
 
         if (Array.isArray(firstValue) && Array.isArray(secondValue)) {
-            const areIdenticalArrays: boolean = identicalArray(firstValue, secondValue);
-            if (!areIdenticalArrays) {
+            const areareIdenticalArrayss: boolean = areIdenticalArrays(firstValue, secondValue);
+            if (!areareIdenticalArrayss) {
                 return false;
             }
         } else if (!areIdentical(firstValue, secondValue)) {
@@ -92,7 +97,7 @@ function areIdenticalObjects(first: object, second: object): boolean {
  * @param first to be compared with the 'second' argument for identicalness.
  * @param second to be compared with the 'first' argument for identicalness.
  */
-export function identicalArray(first: unknown[], second: unknown[]): boolean {
+export function areIdenticalArrays(first: unknown[], second: unknown[]): boolean {
     const length: number = first.length;
 
     if (length !== second.length) {
@@ -102,8 +107,8 @@ export function identicalArray(first: unknown[], second: unknown[]): boolean {
     const firstMatchers: Matcher[] = buildMatcherList(first);
     const secondMatchers: Matcher[] = buildMatcherList(second);
 
-    outer: for (let i: number = 0; i < length; i++) {
-        for (let innerI: number = 0; i < length; innerI++) {
+    outer: for (let i: number = 0 ; i < length ; i++) {
+        for (let innerI: number = 0 ; i < length ; innerI++) {
             const firstMatcher: Matcher = firstMatchers[i];
             const secondMatcher: Matcher = secondMatchers[innerI];
 
@@ -120,13 +125,13 @@ export function identicalArray(first: unknown[], second: unknown[]): boolean {
         }
     }
 
-    for (let i: number = 0; i < length; i++) {
+    for (let i: number = 0 ; i < length ; i++) {
         if (!firstMatchers[i].isIdentical) {
             return false;
         }
     }
 
-    for (let i: number = 0; i < length; i++) {
+    for (let i: number = 0 ; i < length ; i++) {
         if (!secondMatchers[i].isIdentical) {
             return false;
         }

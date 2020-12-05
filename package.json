@@ -19,16 +19,15 @@
   },
   "jest": {
     "preset": "ts-jest/presets/js-with-ts",
-    "collectCoverage": true,
     "collectCoverageFrom": [
-      "**/*.{ts}"
+      "./src/**/*.{ts}"
     ],
     "coverageReporters": [
       "text"
     ],
-    "coverageDirectory": "/coverage",
     "coverageThreshold": {
       "global": {
+        "statements": 80,
         "branches": 80,
         "functions": 80,
         "lines": 80

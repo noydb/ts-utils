@@ -14,6 +14,8 @@ export default {
     }
   ],
   plugins: [
-    typescript()
+    typescript({
+      tsconfig: "./tsconfig.rollup.json"
+    })
   ]
 }

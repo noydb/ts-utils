@@ -27,6 +27,7 @@
   "exclude": [
     "node_modules",
     "rollup.config.js",
-    "src/mock/**"
+    "**/*.spec.ts",
+    "src/mock/*.{ts}"
   ]
 }
