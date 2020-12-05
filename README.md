@@ -2,8 +2,7 @@
 
 # ts-utils
 
-#### **NOTE: USE ESTABLISHED LIBRARIES FOR ANY ENTERPRISE CODEBASE - FOR YOUR SAFETY AND MY
-SANITY.**
+#### NOTE: USE ESTABLISHED LIBRARIES FOR ANY ENTERPRISE CODEBASE - FOR YOUR SAFETY AND MY SANITY
 
 A library of utilities to be used with TypeScript. I appreciate the established and efficacious utility
 libraries out there for both TypeScript and JavaScript so, I wanted to make something of a contribution. 
