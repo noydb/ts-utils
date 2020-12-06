@@ -1,37 +1,46 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/0ca7640d58873389be60/maintainability)](https://codeclimate.com/github/benj-power/ts-utils/maintainability)
 
 # ts-utils
-#### PLEASE NOTE: USE OTHER ESTABLISHED LIBRARIES OVER THIS FOR ANY ENTERPRISE CODEBASE - FOR YOUR SAFETY AND MY SANITY
-
 A library of utilities to be used with TypeScript. I appreciate the established and efficacious utility
 libraries out there for both TypeScript and JavaScript so, I wanted to make something of a contribution. 
 This package will mostly remain unused by the public - with the majority of usage coming from my
 personal projects. I am not writing any groundbreaking utilities, so it follows that I find the
 following worthy of explicit mention: certain functions could be considered impractical and/or
 illogical; I am writing this library out of practice and merriment.
-     
-## Utilities
+
+## Installation
+In a browser (TODO):
+```html
+<script src="bp-ts-utils.js"></script>
+```
+
+Using npm:
+```shell
+$ npm install --save bp-ts-utils
+```
+
+## Library
 ### [any](src/anything/anything.util.ts)
-- `isType(argument: any, type: string)`
+- `isType<T>(argument: T, type: string)`
 
 ### [Array Global Augmentation](src/array/array.global.augmentation.ts)
-- `first()`
+- `first<T>()`
 - `isEmpty()`
-- `isIdenticalTo(array: unknown[])`
-- `last()`
-- `longerThan(array: unknown[])`
-- `shorterThan(array: unknown[])`
+- `isIdenticalTo<T>(array: T[])`
+- `last<T>()`
+- `longerThan<T>(array: T[])`
+- `shorterThan<T>(array: T[])`
 
 ### [Boolean Global Augmentation](src/boolean/boolean.global.augmentation.ts)
-- `not`
+- `not()`
 
 ### [Object](src/object/object.util.ts)
-- `areIdentical`
-- `identicalArray`
-- `isUndefined`
-- `isNull`
-- `isNullOrUndefined`
-- `isANumber`
+- `areIdentical<T>(first: T, second: T)`
+- `areIdenticalArrays<T>(first: T[], second: T[])`
+- `isUndefined<T>(argument: T)`
+- `isNull<T>(argument: T)`
+- `isNullOrUndefined<T>(argument: T)`
+- `isANumber<T>(argument: T)`
 
 ## Releasing to NPM Registry
 - `npm run build`
@@ -43,10 +52,12 @@ illogical; I am writing this library out of practice and merriment.
 ## Running Tests
 - `npm jest`
 
-## Discussions, Comments, Other
-### TODO: Why rollup is being used
-### TODO: Wrapping functions in ObjectUtil or exporting functions as is or using global augmentation
-### TODO: Will this library be compatible with all versions of TypeScript?   
+## Discussions
+- TODO: Why rollup is being used
+- TODO: Wrapping functions in ObjectUtil 
+- TODO: exporting named/default functions 
+- TODO: Global augmentation
+- TODO: Will this library be compatible with all versions of TypeScript?   
 
 ## Links
 - https://github.com/benj-power/ts-utils

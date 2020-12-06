@@ -50,21 +50,7 @@ function areIdenticalObjects<T>(first: T, second: T): boolean {
         return false;
     }
 
-    for (let i: number = 0 ; i < firstKeysLength ; i++) {
-        const key: string = firstKeys[i];
-        const firstValue: T = first[key];
-        const secondValue: T = second[key];
-
-        if (Array.isArray(firstValue) && Array.isArray(secondValue)) {
-            if (!areIdenticalArrays(firstValue, secondValue)) {
-                return false;
-            }
-        } else if (!areIdentical(firstValue, secondValue)) {
-            return false;
-        }
-    }
-
-    return true;
+    return compareObjects(first, second, firstKeys, firstKeysLength);
 }
 
 /**
@@ -82,6 +68,24 @@ const areKeysValid = (firstKeysLength: number, firstKeys: string[], secondKeys: 
 
     for (let i: number = 0 ; i < firstKeysLength ; i++) {
         if (firstKeys[i] !== secondKeys[i]) {
+            return false;
+        }
+    }
+
+    return true;
+};
+
+const compareObjects = <T>(first: T, second: T, firstKeys: string[], firstKeysLength: number): boolean => {
+    for (let i: number = 0 ; i < firstKeysLength ; i++) {
+        const key: string = firstKeys[i];
+        const firstValue: T = first[key];
+        const secondValue: T = second[key];
+
+        if (Array.isArray(firstValue) && Array.isArray(secondValue)) {
+            if (!areIdenticalArrays(firstValue, secondValue)) {
+                return false;
+            }
+        } else if (!areIdentical(firstValue, secondValue)) {
             return false;
         }
     }
@@ -111,7 +115,7 @@ export function areIdenticalArrays<T>(first: T[], second: T[]): boolean {
     const secondMatchers: Matcher<T>[] = buildMatcherList(second);
     compareArrayElements(firstMatchers, secondMatchers, length);
 
-    return areMatchersValid(firstMatchers, secondMatchers, length);
+    return isMatcherValid(firstMatchers, length) && isMatcherValid(secondMatchers, length);
 }
 
 const buildMatcherList = <T>(array: T[]): Matcher<T>[] => {
@@ -155,19 +159,12 @@ const compareArrayElements = <T>(firstMatchers: Matcher<T>[], secondMatchers: Ma
  * Returns true if all Matcher elements have a value corresponding true value for
  * 'isIdentical' field.
  *
- * @param firstMatchers to be checked for validity.
- * @param secondMatchers to be checked for validity.
+ * @param matchers to be checked for validity.
  * @param length for iteration & caching purposes.
  */
-const areMatchersValid = <T>(firstMatchers: Matcher<T>[], secondMatchers: Matcher<T>[], length: number): boolean => {
+const isMatcherValid = <T>(matchers: Matcher<T>[], length: number): boolean => {
     for (let i: number = 0 ; i < length ; i++) {
-        if (!firstMatchers[i].isIdentical) {
-            return false;
-        }
-    }
-
-    for (let i: number = 0 ; i < length ; i++) {
-        if (!secondMatchers[i].isIdentical) {
+        if (!matchers[i].isIdentical) {
             return false;
         }
     }

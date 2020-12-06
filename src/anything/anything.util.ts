@@ -5,7 +5,7 @@
  * @param argument whose type is being evaluated.
  * @param type to compare with the first arg's type.
  */
-export function isType(argument: any,
+export function isType<T>(argument: T,
                          type: "bigint" | "boolean" | "function" | "number"
                              | "object" | "string" | "symbol" | "undefined"): boolean {
     return typeof argument === type;
