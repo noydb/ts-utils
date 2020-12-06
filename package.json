@@ -12,9 +12,9 @@
     "npm": ">=5"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "rm -rf dist && rollup -c",
     "start": "rollup -c rollup.config.js -w",
-    "test": "jest --coverage --coverageReporters='text-summary'",
+    "test": "rm -rf dist && jest --coverage --coverageReporters='text-summary'",
     "lint": "tslint -c tslint.json 'src/**/*.ts'"
   },
   "jest": {
