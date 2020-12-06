@@ -18,7 +18,7 @@ declare global {
          *
          * @return T object of type of 'this' Array.
          */
-        first(): T;
+        first<T>(): T;
 
         /**
          * Returns true if 'this' Array has a length of zero.
@@ -46,7 +46,7 @@ declare global {
          *
          * @return T object of type of 'this' Array.
          */
-        last(): T;
+        last<T>(): T;
 
         /**
          * Returns true if 'this' Array is longer than the specified 'array' argument.
@@ -55,7 +55,7 @@ declare global {
          * @return boolean indicating whether 'this' Array is longer than the specified
          * 'array'.
          */
-        longerThan(array: unknown[]): boolean;
+        longerThan<T>(array: T[]): boolean;
 
         /**
          * Returns true if 'this' Array is short than the specified 'array' argument.
@@ -64,13 +64,13 @@ declare global {
          * @return boolean indicating whether  'this' Array shorter than the
          * specified Array.
          */
-        shorterThan(array: unknown[]): boolean;
+        shorterThan<T>(array: T[]): boolean;
     }
 }
 
 /* IMPLEMENTATIONS */
 
-Array.prototype.first = function(): unknown {
+Array.prototype.first = function<T>(): T {
     return this[0];
 };
 
@@ -78,18 +78,18 @@ Array.prototype.isEmpty = function(): boolean {
     return 0 === this.length;
 };
 
-Array.prototype.isIdenticalTo = function(array: unknown[]): boolean {
+Array.prototype.isIdenticalTo = function<T>(array: T[]): boolean {
     return areIdenticalArrays(this, array);
 };
 
-Array.prototype.last = function(): unknown {
+Array.prototype.last = function<T>(): T {
     return this.isEmpty() ? undefined : this[this.length - 1];
 };
 
-Array.prototype.longerThan = function(array: unknown[]): boolean {
+Array.prototype.longerThan = function<T>(array: T[]): boolean {
     return this.length > array.length;
 };
 
-Array.prototype.shorterThan = function(array: unknown[]): boolean {
+Array.prototype.shorterThan = function<T>(array: T[]): boolean {
     return this.length < array.length;
 };
