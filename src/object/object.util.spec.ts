@@ -44,6 +44,12 @@ describe("object util", () => {
                     expect(areIdentical(firstMock, secondMock)).toBeFalsy();
                 });
             });
+
+            it("#7", () => {
+                const result: boolean = areIdentical(null, undefined);
+
+                expect(result).toBeFalsy();
+            });
         });
 
         describe("will return true ", () => {

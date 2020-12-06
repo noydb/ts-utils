@@ -9,38 +9,37 @@ following worthy of explicit mention: certain functions could be considered impr
 illogical; I am writing this library out of practice and merriment.
 
 ## Installation
-In a browser (TODO):
-```html
-<script src="bp-ts-utils.js"></script>
-```
-
 Using npm:
 ```shell
 $ npm install --save bp-ts-utils
 ```
 
 ## Library
-### [any](src/anything/anything.util.ts)
+#### [any](src/anything/anything.util.ts)
 - `isType<T>(argument: T, type: string)`
 
-### [Array Global Augmentation](src/array/array.global.augmentation.ts)
-- `first<T>()`
-- `isEmpty()`
-- `isIdenticalTo<T>(array: T[])`
-- `last<T>()`
-- `longerThan<T>(array: T[])`
-- `shorterThan<T>(array: T[])`
+#### [Array Global Augmentation](src/array/array.global.augmentation.ts)
+- `first<T>(): T`
+- `isEmpty(): boolean`
+- `isIdenticalTo<T>(array: T[]): boolean`
+- `last<T>(): T`
+- `longerThan<T>(array: T[]): boolean`
+- `shorterThan<T>(array: T[]): boolean`
 
-### [Boolean Global Augmentation](src/boolean/boolean.global.augmentation.ts)
-- `not()`
+#### [Boolean Global Augmentation](src/boolean/boolean.global.augmentation.ts)
+- `not(): boolean`
 
-### [Object](src/object/object.util.ts)
-- `areIdentical<T>(first: T, second: T)`
-- `areIdenticalArrays<T>(first: T[], second: T[])`
-- `isUndefined<T>(argument: T)`
-- `isNull<T>(argument: T)`
-- `isNullOrUndefined<T>(argument: T)`
-- `isANumber<T>(argument: T)`
+Note: should this return `T` or `boolean`?
+
+what about returning T here?
+
+#### [Object](src/object/object.util.ts)
+- `areIdentical<T>(first: T, second: T): boolean`
+- `areIdenticalArrays<T>(first: T[], second: T[]): boolean`
+- `isUndefined<T>(argument: T): boolean`
+- `isNull<T>(argument: T): boolean`
+- `isNullOrUndefined<T>(argument: T): boolean`
+- `isANumber<T>(argument: T): boolean`
 
 ## Releasing to NPM Registry
 - `npm run build`
@@ -49,8 +48,10 @@ $ npm install --save bp-ts-utils
 
 [View release on registry](https://www.npmjs.com/package/bp-ts-utils?activeTab=versions)
 
-## Running Tests
-- `npm jest`
+## Commands
+- **lint**: `npm run lint`
+- **test**: `npm test`
+- **build**: `npm run build`
 
 ## Discussions
 - TODO: Why rollup is being used
