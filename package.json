@@ -1,7 +1,7 @@
 {
   "name": "bp-ts-utils",
   "version": "2.2.0",
-  "description": "Banjo's TypeScript Utilities",
+  "description": "TypeScript Utility library",
   "author": "banjo OBE",
   "license": "Apache-2.0",
   "repository": "github:benj-power/ts-utils",
@@ -21,9 +21,6 @@
     "preset": "ts-jest/presets/js-with-ts",
     "collectCoverageFrom": [
       "./src/**/*.{ts}"
-    ],
-    "coverageReporters": [
-      "text"
     ],
     "coverageThreshold": {
       "global": {
