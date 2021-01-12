@@ -1,10 +1,10 @@
-import { areIdentical } from "./object.util";
+import { areIdentical, isANumber, isNull, isNullOrUndefined, isUndefined } from "./object.util";
 import { Person, PersonAMocks, PersonBMocks, PersonGenerator } from "../mock/mock";
 
 describe("object util", () => {
 
     describe("areIdentical", () => {
-        describe(" will return false", () => {
+        describe("will return false", () => {
             it("#1", () => {
                 const result: boolean = areIdentical(PersonAMocks.BASE, PersonAMocks.FAIL_ONE);
 
@@ -91,6 +91,100 @@ describe("object util", () => {
 
                     expect(areIdentical(mock.children, mock.children)).toBeTruthy();
                 });
+            });
+        });
+    });
+
+    describe("isUndefined", () => {
+        describe("will return false", () => {
+            it("#1", () => {
+                expect(isUndefined(null)).toBeFalsy();
+            });
+
+            it("#2", () => {
+                expect(isUndefined([])).toBeFalsy();
+            });
+
+            it("#3", () => {
+                expect(isUndefined("")).toBeFalsy();
+            });
+
+            it("#4", () => {
+                expect(isUndefined(false)).toBeFalsy();
+            });
+        });
+
+        describe("will return true", () => {
+            it("#1", () => {
+                expect(isUndefined(undefined)).toBeTruthy();
+            });
+        });
+    });
+
+    describe("isNull", () => {
+        describe("will return false", () => {
+            it("#1", () => {
+                expect(isNull(undefined)).toBeFalsy();
+            });
+
+            it("#2", () => {
+                expect(isNull([])).toBeFalsy();
+            });
+
+            it("#3", () => {
+                expect(isNull("")).toBeFalsy();
+            });
+
+            it("#4", () => {
+                expect(isNull(false)).toBeFalsy();
+            });
+        });
+
+        describe("will return true", () => {
+            it("#1", () => {
+                expect(isNull(null)).toBeTruthy();
+            });
+        });
+    });
+
+    describe("isNullOrUndefined", () => {
+        describe("will return true", () => {
+            it("#1", () => {
+                expect(isNullOrUndefined(null)).toBeTruthy();
+            });
+
+            it("#2", () => {
+                expect(isNullOrUndefined(undefined)).toBeTruthy();
+            });
+        });
+    });
+
+    describe("isANumber", () => {
+        describe("will return true", () => {
+            it("#1", () => {
+                expect(isANumber(1)).toBeTruthy();
+            });
+
+            it("#2", () => {
+                expect(isANumber(1.02023)).toBeTruthy();
+            });
+
+            it("#3", () => {
+                expect(isANumber(805645645645)).toBeTruthy();
+            });
+
+            it("#4", () => {
+                expect(isANumber(.5)).toBeTruthy();
+            });
+        });
+
+        describe("will return false", () => {
+            it("#1", () => {
+                expect(isANumber("5")).toBeFalsy();
+            });
+
+            it("#2", () => {
+                expect(isANumber(false)).toBeFalsy();
             });
         });
     });

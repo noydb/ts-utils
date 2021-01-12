@@ -54,7 +54,7 @@ function areIdenticalObjects<T>(first: T, second: T): boolean {
         return false;
     }
 
-    return compareObjects(first, second, firstKeys, firstKeysLength);
+    return compareObjects(first, second, firstKeys);
 }
 
 /**
@@ -79,7 +79,9 @@ const areKeysValid = (firstKeysLength: number, firstKeys: string[], secondKeys: 
     return true;
 };
 
-const compareObjects = <T>(first: T, second: T, firstKeys: string[], firstKeysLength: number): boolean => {
+const compareObjects = <T>(first: T, second: T, firstKeys: string[]): boolean => {
+    const firstKeysLength: number = firstKeys.length;
+
     for (let i: number = 0 ; i < firstKeysLength ; i++) {
         const key: string = firstKeys[i];
         const firstValue: T = first[key];
@@ -102,7 +104,7 @@ const compareObjects = <T>(first: T, second: T, firstKeys: string[], firstKeysLe
  *
  * @param argument are you undefined?
  */
-export function isUndefined<T>(argument: T): boolean {
+export function isUndefined(argument: unknown): boolean {
     return argument === undefined;
 }
 
@@ -111,7 +113,7 @@ export function isUndefined<T>(argument: T): boolean {
  *
  * @param argument are you null?
  */
-export function isNull<T>(argument: T): boolean {
+export function isNull(argument: unknown): boolean {
     return argument === null;
 }
 
@@ -120,7 +122,7 @@ export function isNull<T>(argument: T): boolean {
  *
  * @param argument are you null or undefined?
  */
-export function isNullOrUndefined<T>(argument: T): boolean {
+export function isNullOrUndefined(argument: unknown): boolean {
     return isUndefined(argument) || isNull(argument);
 }
 
@@ -129,6 +131,6 @@ export function isNullOrUndefined<T>(argument: T): boolean {
  *
  * @param argument are you not not a (!isNaN...) number?
  */
-export function isANumber<T>(argument: T): boolean {
+export function isANumber(argument: unknown): boolean {
     return typeof argument === "number";
 }

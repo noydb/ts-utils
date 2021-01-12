@@ -1,4 +1,4 @@
-import { areIdenticalArrays } from "../object/object.util";
+import { areIdenticalArrays } from "./array.util";
 
 // Ensure this is treated as a module.
 export {};
@@ -18,7 +18,7 @@ declare global {
          *
          * @return T object of type of 'this' Array.
          */
-        first<T>(): T;
+        first(): T;
 
         /**
          * Returns true if 'this' Array has a length of zero.
@@ -37,7 +37,7 @@ declare global {
          * @param array to be compared against 'this' Array for identicalness.
          * @return boolean indicating whether the two arrays are identical.
          */
-        isIdenticalTo<T>(array: T[]): boolean;
+        isIdenticalTo(array: T[]): boolean;
 
         /**
          * Returns the last element belonging to 'this' Array.
@@ -46,7 +46,7 @@ declare global {
          *
          * @return T object of type of 'this' Array.
          */
-        last<T>(): T;
+        last(): T;
 
         /**
          * Returns true if 'this' Array is longer than the specified 'array' argument.
@@ -55,7 +55,7 @@ declare global {
          * @return boolean indicating whether 'this' Array is longer than the specified
          * 'array'.
          */
-        longerThan<T>(array: T[]): boolean;
+        longerThan(array: T[]): boolean;
 
         /**
          * Returns true if 'this' Array is short than the specified 'array' argument.
@@ -64,7 +64,7 @@ declare global {
          * @return boolean indicating whether  'this' Array shorter than the
          * specified Array.
          */
-        shorterThan<T>(array: T[]): boolean;
+        shorterThan(array: T[]): boolean;
     }
 }
 
