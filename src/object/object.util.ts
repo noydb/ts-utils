@@ -1,4 +1,4 @@
-import { areIdenticalArrays } from "../array/array.util";
+import { Matcher } from "../interface/matcher.interface";
 
 /**
  * Returns true if the values of the specified 'first' & 'second' argument are
@@ -22,15 +22,12 @@ export function areIdentical<T>(first: T, second: T): boolean {
 
     switch (typeof first) {
         case "boolean":
-            return first === second;
         case "number":
+        case "string":
+        case "undefined":
             return first === second;
         case "object":
             return areIdenticalObjects(first, second);
-        case "string":
-            return first === second;
-        case "undefined":
-            return first === second;
     }
 
     return true;
@@ -102,7 +99,7 @@ const compareObjects = <T>(first: T, second: T, firstKeys: string[], firstKeysLe
  *
  * @param argument are you undefined?
  */
-export function isUndefined<T>(argument: T): boolean {
+export function isUndefined(argument: unknown): boolean {
     return argument === undefined;
 }
 
@@ -111,7 +108,7 @@ export function isUndefined<T>(argument: T): boolean {
  *
  * @param argument are you null?
  */
-export function isNull<T>(argument: T): boolean {
+export function isNull(argument: unknown): boolean {
     return argument === null;
 }
 
@@ -120,7 +117,7 @@ export function isNull<T>(argument: T): boolean {
  *
  * @param argument are you null or undefined?
  */
-export function isNullOrUndefined<T>(argument: T): boolean {
+export function isNullOrUndefined(argument: unknown): boolean {
     return isUndefined(argument) || isNull(argument);
 }
 
@@ -129,6 +126,91 @@ export function isNullOrUndefined<T>(argument: T): boolean {
  *
  * @param argument are you not not a (!isNaN...) number?
  */
-export function isANumber<T>(argument: T): boolean {
+export function isANumber(argument: unknown): boolean {
     return typeof argument === "number";
 }
+
+/* array util. situated here because of circular dependency.
+ I would prefer to have it in its own file(array.util.ts) */
+
+/**
+ * Returns true if the values of the two specified arrays are identical - that is,
+ * every element belonging to argument 'first', has a corresponding identical
+ * element belonging to argument 'second'.
+ *
+ * TODO: provide code examples of true and false results.
+ * TODO: Elaborate further on logic, if possible.
+ *
+ * @param first to be compared with the 'second' argument for identicalness.
+ * @param second to be compared with the 'first' argument for identicalness.
+ */
+export function areIdenticalArrays<T>(first: T[], second: T[]): boolean {
+    const length: number = first.length;
+
+    if (length !== second.length) {
+        return false;
+    }
+
+    const firstMatchers: Matcher<T>[] = buildMatcherList(first, length);
+    const secondMatchers: Matcher<T>[] = buildMatcherList(second, length);
+    compareArrayElements(firstMatchers, secondMatchers, length);
+
+    return isMatcherValid(firstMatchers, length) && isMatcherValid(secondMatchers, length);
+}
+
+const buildMatcherList = <T>(array: T[], length: number): Matcher<T>[] => {
+    const list: Array<Matcher<T>> = [];
+
+    for (let i: number = 0 ; i < length ; i++) {
+        list.push({ object: array[i], isIdentical: false });
+    }
+
+    return list;
+};
+
+/**
+ * Checks if each element in 'firstMatchers' argument has a corresponding identical
+ * element in 'secondMatchers' argument.
+ *
+ * @param firstMatchers to be compared with 'secondMatchers'
+ * @param secondMatchers to be compared with 'firstMatchers'
+ * @param length for iteration & caching purposes.
+ */
+const compareArrayElements = <T>(firstMatchers: Matcher<T>[], secondMatchers: Matcher<T>[], length: number): void => {
+    outer: for (let i: number = 0 ; i < length ; i++) {
+        for (let innerI: number = 0 ; i < length ; innerI++) {
+            const firstMatcher: Matcher<T> = firstMatchers[i];
+            const secondMatcher: Matcher<T> = secondMatchers[innerI];
+
+            if (secondMatcher.isIdentical) {
+                continue;
+            }
+
+            if (areIdentical(firstMatcher.object, secondMatcher.object)) {
+                firstMatcher.isIdentical = true;
+                secondMatcher.isIdentical = true;
+
+                continue outer;
+            }
+        }
+    }
+};
+
+/**
+ * Returns true if all Matcher elements have a value corresponding true value for
+ * 'isIdentical' field.
+ *
+ * @param matchers to be checked for validity.
+ * @param length for iteration & caching purposes.
+ */
+const isMatcherValid = <T>(matchers: Matcher<T>[], length: number): boolean => {
+    for (let i: number = 0 ; i < length ; i++) {
+        if (!matchers[i].isIdentical) {
+            return false;
+        }
+    }
+
+    return true;
+};
+
+/* array util end */

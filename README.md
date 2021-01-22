@@ -15,31 +15,30 @@ $ npm install --save bp-ts-utils
 ```
 
 ## Library
-#### [any](src/anything/anything.util.ts)
-- `isType<T>(argument: T, type: string)`
-
-#### [Array Global Augmentation](src/array/array.global.augmentation.ts)
-- `first<T>(): T`
+### [Array Global Augmentation](src/array/array.global.augmentation.ts)
+- `first(): T`
 - `isEmpty(): boolean`
-- `isIdenticalTo<T>(array: T[]): boolean`
-- `last<T>(): T`
-- `longerThan<T>(array: T[]): boolean`
-- `shorterThan<T>(array: T[]): boolean`
+- `isIdenticalTo(array: T[]): boolean`
+- `last(): T`
+- `longerThan(array: T[]): boolean`
+- `shorterThan(array: T[]): boolean`
+- `clone(array: unknown[]): unknown[]`
+- `cloneWithValidation(array: unknown[]): unknown[]`
 
-#### [Boolean Global Augmentation](src/boolean/boolean.global.augmentation.ts)
+### [Boolean Global Augmentation](src/boolean/boolean.global.augmentation.ts)
 - `not(): boolean`
 
-Note: should this return `T` or `boolean`?
+### [Clone](src/clone/clone.util.ts)
+- `clone(argument: unknown | unknown[]): unknown | unknown[]`
+- `cloneWithValidation(argument: unknown | unknown[]): unknown | unknown[]`
 
-what about returning T here?
-
-#### [Object](src/object/object.util.ts)
+### [Object](src/object/object.util.ts)
 - `areIdentical<T>(first: T, second: T): boolean`
-- `areIdenticalArrays<T>(first: T[], second: T[]): boolean`
-- `isUndefined<T>(argument: T): boolean`
-- `isNull<T>(argument: T): boolean`
-- `isNullOrUndefined<T>(argument: T): boolean`
-- `isANumber<T>(argument: T): boolean`
+- `isUndefined(argument: unknown): boolean`
+- `isNull(argument: unknown): boolean`
+- `isNullOrUndefined(argument: unknown): boolean`
+- `isANumber(argument: unknown): boolean`
+- `areIdenticalArrays(first: T[], second: T[]): boolean`
 
 ## Releasing to NPM Registry
 - `npm run build`
@@ -52,13 +51,6 @@ what about returning T here?
 - **lint**: `npm run lint`
 - **test**: `npm test`
 - **build**: `npm run build`
-
-## Discussions
-- TODO: Why rollup is being used
-- TODO: Wrapping functions in ObjectUtil 
-- TODO: exporting named/default functions 
-- TODO: Global augmentation
-- TODO: Will this library be compatible with all versions of TypeScript?   
 
 ## Links
 - https://github.com/benj-power/ts-utils

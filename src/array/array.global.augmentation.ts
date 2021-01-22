@@ -1,3 +1,4 @@
+import { clone, cloneWithValidation } from "../../src/clone/clone.util";
 import { areIdenticalArrays } from "../object/object.util";
 
 // Ensure this is treated as a module.
@@ -18,7 +19,7 @@ declare global {
          *
          * @return T object of type of 'this' Array.
          */
-        first<T>(): T;
+        first(): T;
 
         /**
          * Returns true if 'this' Array has a length of zero.
@@ -37,7 +38,7 @@ declare global {
          * @param array to be compared against 'this' Array for identicalness.
          * @return boolean indicating whether the two arrays are identical.
          */
-        isIdenticalTo<T>(array: T[]): boolean;
+        isIdenticalTo(array: T[]): boolean;
 
         /**
          * Returns the last element belonging to 'this' Array.
@@ -46,7 +47,7 @@ declare global {
          *
          * @return T object of type of 'this' Array.
          */
-        last<T>(): T;
+        last(): T;
 
         /**
          * Returns true if 'this' Array is longer than the specified 'array' argument.
@@ -55,7 +56,7 @@ declare global {
          * @return boolean indicating whether 'this' Array is longer than the specified
          * 'array'.
          */
-        longerThan<T>(array: T[]): boolean;
+        longerThan(array: T[]): boolean;
 
         /**
          * Returns true if 'this' Array is short than the specified 'array' argument.
@@ -64,13 +65,30 @@ declare global {
          * @return boolean indicating whether  'this' Array shorter than the
          * specified Array.
          */
-        shorterThan<T>(array: T[]): boolean;
+        shorterThan(array: T[]): boolean;
+
+        /**
+         * Returns a [...spread] clone of the specified array.
+         * @see clone inside clone.util.ts for more
+         *
+         * @param array to be cloned.
+         */
+        clone(array: unknown[]): unknown[];
+
+        /**
+         * Returns a [...spread] clone of the specified array and validates the
+         * argument against its clone.
+         * @see cloneWithValidation inside clone.util.ts for more
+         *
+         * @param array to be cloned and validated.
+         */
+        cloneWithValidation(array: unknown[]): unknown[];
     }
 }
 
 /* IMPLEMENTATIONS */
 
-Array.prototype.first = function<T>(): T {
+Array.prototype.first = function <T>(): T {
     return this[0];
 };
 
@@ -78,18 +96,29 @@ Array.prototype.isEmpty = function(): boolean {
     return 0 === this.length;
 };
 
-Array.prototype.isIdenticalTo = function<T>(array: T[]): boolean {
+Array.prototype.isIdenticalTo = function <T>(array: T[]): boolean {
     return areIdenticalArrays(this, array);
 };
 
-Array.prototype.last = function<T>(): T {
+Array.prototype.last = function <T>(): T {
     return this.isEmpty() ? undefined : this[this.length - 1];
 };
 
-Array.prototype.longerThan = function<T>(array: T[]): boolean {
+Array.prototype.longerThan = function <T>(array: T[]): boolean {
     return this.length > array.length;
 };
 
-Array.prototype.shorterThan = function<T>(array: T[]): boolean {
+Array.prototype.shorterThan = function <T>(array: T[]): boolean {
     return this.length < array.length;
+};
+
+Array.prototype.clone = function(array: unknown[]): unknown[] {
+    // could this throw an error? what if undefined is passed in and returned?
+    // undefined as Array<unknown> will surely break?
+    return clone(array) as Array<unknown>;
+};
+
+Array.prototype.cloneWithValidation = function(array: unknown[]): unknown[] {
+    // same as above inline comment
+    return cloneWithValidation(array) as Array<unknown>;
 };
