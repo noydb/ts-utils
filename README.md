@@ -16,36 +16,42 @@ $ npm install --save bp-ts-utils
 
 ## Library
 ### [Array Global Augmentation](src/array/array.global.augmentation.ts)
-- `first(): T`
-- `isEmpty(): boolean`
-- `isIdenticalTo(array: T[]): boolean`
-- `last(): T`
-- `longerThan(array: T[]): boolean`
-- `shorterThan(array: T[]): boolean`
-- `clone(array: unknown[]): unknown[]`
-- `cloneWithValidation(array: unknown[]): unknown[]`
-
+```
+first(): T
+isEmpty(): boolean
+isIdenticalTo(array: T[]): boolean
+last(): T
+longerThan(array: T[]): boolean
+shorterThan(array: T[]): boolean
+clone(array: unknown[]): unknown[]
+cloneWithValidation(array: unknown[]): unknown[]
+```
 ### [Boolean Global Augmentation](src/boolean/boolean.global.augmentation.ts)
-- `not(): boolean`
+```
+not(): boolean
+```
 
 ### [Clone](src/clone/clone.util.ts)
-- `clone(argument: unknown | unknown[]): unknown | unknown[]`
-- `cloneWithValidation(argument: unknown | unknown[]): unknown | unknown[]`
+```
+clone(argument: unknown | unknown[]): unknown | unknown[]
+cloneWithValidation(argument: unknown | unknown[]): unknown | unknown[]
+```
 
 ### [Object](src/object/object.util.ts)
-- `areIdentical<T>(first: T, second: T): boolean`
-- `isUndefined(argument: unknown): boolean`
-- `isNull(argument: unknown): boolean`
-- `isNullOrUndefined(argument: unknown): boolean`
-- `isANumber(argument: unknown): boolean`
-- `areIdenticalArrays(first: T[], second: T[]): boolean`
+```
+areIdentical<T>(first: T, second: T): boolean
+isUndefined(argument: unknown): boolean
+isNull(argument: unknown): boolean
+isNullOrUndefined(argument: unknown): boolean
+isANumber(argument: unknown): boolean
+areIdenticalArrays(first: T[], second: T[]): boolean
+```
 
 ## Releasing to NPM Registry
 - `npm run build`
 - `npm version <semantic-version>`
 - `npm publish`
-
-[View release on registry](https://www.npmjs.com/package/bp-ts-utils?activeTab=versions)
+- [View release on registry](https://www.npmjs.com/package/bp-ts-utils?activeTab=versions)
 
 ## Commands
 - **lint**: `npm run lint`
@@ -55,3 +61,4 @@ $ npm install --save bp-ts-utils
 ## Links
 - https://github.com/benj-power/ts-utils
 - https://www.npmjs.com/package/bp-ts-utils
+- [Technical Notes](TECH.md)
