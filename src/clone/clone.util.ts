@@ -1,3 +1,6 @@
+import { areIdentical, isNull } from "../object/object.util";
+import { CloneError } from "../error/clone.error";
+
 /**
  * Clones the provided argument.
  * "Techniques" for differing variables:
@@ -11,9 +14,6 @@
  *
  * @param argument to be cloned.
  */
-import { areIdentical, isNull } from "../object/object.util";
-import { CloneError } from "../error/clone.error";
-
 export function clone(argument: unknown | unknown[]): unknown {
     if (Array.isArray(argument)) {
         return [...argument];
