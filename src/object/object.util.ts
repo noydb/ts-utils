@@ -20,15 +20,12 @@ export function areIdentical<T>(first: T, second: T): boolean {
 
     switch (typeof first) {
         case "boolean":
-            return first === second;
         case "number":
+        case "string":
+        case "undefined":
             return first === second;
         case "object":
             return areIdenticalObjects(first, second);
-        case "string":
-            return first === second;
-        case "undefined":
-            return first === second;
     }
 
     return true;
@@ -52,7 +49,7 @@ function areIdenticalObjects<T>(first: T, second: T): boolean {
         return false;
     }
 
-    return compareObjects(first, second, firstKeys);
+    return compareObjects(first, second, firstKeys, firstKeysLength);
 }
 
 /**
@@ -77,9 +74,7 @@ const areKeysValid = (firstKeysLength: number, firstKeys: string[], secondKeys: 
     return true;
 };
 
-const compareObjects = <T>(first: T, second: T, firstKeys: string[]): boolean => {
-    const firstKeysLength: number = firstKeys.length;
-
+const compareObjects = <T>(first: T, second: T, firstKeys: string[], firstKeysLength: number): boolean => {
     for (let i: number = 0 ; i < firstKeysLength ; i++) {
         const key: string = firstKeys[i];
         const firstValue: T = first[key];

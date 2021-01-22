@@ -58,6 +58,7 @@ Note: should this return `T` or `boolean`?
 - Will this library be compatible with all versions of TypeScript?   
 - generics vs unknown (https://stackoverflow.com/a/51569726/8061089).
 - what is *.js.map
+- make it optional to attach utils through augmentation
 
 ## Links
 - https://github.com/benj-power/ts-utils

@@ -1,4 +1,5 @@
 import { areIdenticalArrays } from "./array.util";
+import { clone, cloneWithValidation } from "../../src/clone/clone.util";
 
 // Ensure this is treated as a module.
 export {};
@@ -65,12 +66,29 @@ declare global {
          * specified Array.
          */
         shorterThan(array: T[]): boolean;
+
+        /**
+         * Returns a [...spread] clone of the specified array.
+         * @see clone inside clone.util.ts for more
+         *
+         * @param array to be cloned.
+         */
+        clone<T>(array: T[]): T;
+
+        /**
+         * Returns a [...spread] clone of the specified array and validates the
+         * argument against its clone.
+         * @see cloneWithValidation inside clone.util.ts for more
+         *
+         * @param array to be cloned and validated.
+         */
+        cloneWithValidation<T>(array: T[]): T;
     }
 }
 
 /* IMPLEMENTATIONS */
 
-Array.prototype.first = function<T>(): T {
+Array.prototype.first = function <T>(): T {
     return this[0];
 };
 
@@ -78,18 +96,26 @@ Array.prototype.isEmpty = function(): boolean {
     return 0 === this.length;
 };
 
-Array.prototype.isIdenticalTo = function<T>(array: T[]): boolean {
+Array.prototype.isIdenticalTo = function <T>(array: T[]): boolean {
     return areIdenticalArrays(this, array);
 };
 
-Array.prototype.last = function<T>(): T {
+Array.prototype.last = function <T>(): T {
     return this.isEmpty() ? undefined : this[this.length - 1];
 };
 
-Array.prototype.longerThan = function<T>(array: T[]): boolean {
+Array.prototype.longerThan = function <T>(array: T[]): boolean {
     return this.length > array.length;
 };
 
-Array.prototype.shorterThan = function<T>(array: T[]): boolean {
+Array.prototype.shorterThan = function <T>(array: T[]): boolean {
     return this.length < array.length;
+};
+
+Array.prototype.clone = function <T>(array: T[]): T {
+    return clone(array);
+};
+
+Array.prototype.cloneWithValidation = function <T>(array: T[]): T {
+    return cloneWithValidation(array);
 };
