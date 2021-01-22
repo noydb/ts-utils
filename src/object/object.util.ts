@@ -151,20 +151,21 @@ export function areIdenticalArrays<T>(first: T[], second: T[]): boolean {
         return false;
     }
 
-    const firstMatchers: Matcher<T>[] = buildMatcherList(first);
-    const secondMatchers: Matcher<T>[] = buildMatcherList(second);
+    const firstMatchers: Matcher<T>[] = buildMatcherList(first, length);
+    const secondMatchers: Matcher<T>[] = buildMatcherList(second, length);
     compareArrayElements(firstMatchers, secondMatchers, length);
 
     return isMatcherValid(firstMatchers, length) && isMatcherValid(secondMatchers, length);
 }
 
-const buildMatcherList = <T>(array: T[]): Matcher<T>[] => {
-    return array.map((object: T) =>
-        ({
-            object,
-            isIdentical: false
-        })
-    );
+const buildMatcherList = <T>(array: T[], length: number): Matcher<T>[] => {
+    const list: Array<Matcher<T>> = [];
+
+    for (let i: number = 0 ; i < length ; i++) {
+        list.push({ object: array[i], isIdentical: false });
+    }
+
+    return list;
 };
 
 /**
