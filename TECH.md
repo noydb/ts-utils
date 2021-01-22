@@ -1,6 +1,6 @@
-## Technical Notes and other
+# Technical Notes and other
 
-### Rollup
+## Rollup
 
 Module bundler for JavaScript which compiles small pieces of code into something larger and more 
 complex, such as a library or application. It uses the new standardized format for code modules included 
@@ -19,7 +19,7 @@ The biggest issue with Rollup is that it focuses on one thing: **creating produc
 is not much developer experience (apart from file watching and caching). It cannot produce development
 bundles, does not provide a web server, and only reads relative ES modules by default. 
 
-### package.json
+## package.json
 
 **dependencies**: critical for your library to work in production (lodash, etc)
 
@@ -30,7 +30,7 @@ suspect that a library that will depend on this project (pX) will *also* depend 
 then you should use peerDependencies. A warning will be displayed if the main project does not use the
 specified version (it is best not to be too strict when defining peer dependency versions!).
 
-### Further significance (TODO)
+## Further significance (TODO)
 - Wrapping static functions in Class vs exporting flat ones
 - Global augmentation
 - Will this library be compatible with all versions of TypeScript?
