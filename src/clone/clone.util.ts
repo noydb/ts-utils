@@ -14,7 +14,7 @@
 import { areIdentical, isNull } from "../object/object.util";
 import { CloneError } from "../error/clone.error";
 
-export function clone<T>(argument: T | T[]): T {
+export function clone(argument: unknown | unknown[]): unknown {
     if (Array.isArray(argument)) {
         return [...argument];
     }
@@ -46,7 +46,7 @@ export function clone<T>(argument: T | T[]): T {
  * @param argument to be cloned and subsequently validated against its clone
  * @throws CloneError if the argument is not identical to its clone
  */
-export function cloneWithValidation<T>(argument: T | T[]): T {
+export function cloneWithValidation(argument: unknown | unknown[]): unknown {
     const argumentClone: unknown = clone(argument);
 
     areIdentical(argument, argument);

@@ -1,5 +1,5 @@
-import { areIdenticalArrays } from "./array.util";
 import { clone, cloneWithValidation } from "../../src/clone/clone.util";
+import { areIdenticalArrays } from "../object/object.util";
 
 // Ensure this is treated as a module.
 export {};
@@ -73,7 +73,7 @@ declare global {
          *
          * @param array to be cloned.
          */
-        clone<T>(array: T[]): T;
+        clone(array: unknown[]): unknown[];
 
         /**
          * Returns a [...spread] clone of the specified array and validates the
@@ -82,7 +82,7 @@ declare global {
          *
          * @param array to be cloned and validated.
          */
-        cloneWithValidation<T>(array: T[]): T;
+        cloneWithValidation(array: unknown[]): unknown[];
     }
 }
 
@@ -112,10 +112,13 @@ Array.prototype.shorterThan = function <T>(array: T[]): boolean {
     return this.length < array.length;
 };
 
-Array.prototype.clone = function <T>(array: T[]): T {
-    return clone(array);
+Array.prototype.clone = function(array: unknown[]): unknown[] {
+    // could this throw an error? what if undefined is passed in and returned?
+    // undefined as Array<unknown> will surely break?
+    return clone(array) as Array<unknown>;
 };
 
-Array.prototype.cloneWithValidation = function <T>(array: T[]): T {
-    return cloneWithValidation(array);
+Array.prototype.cloneWithValidation = function(array: unknown[]): unknown[] {
+    // same as above inline comment
+    return cloneWithValidation(array) as Array<unknown>;
 };
