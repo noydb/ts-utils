@@ -23,11 +23,14 @@
     "noUnusedParameters": true,
     "esModuleInterop": true
   },
-  "include": [],
+  "include": [
+    "src/**/*.util.ts",
+    "src/**/global.augmentation.ts"
+  ],
   "exclude": [
     "node_modules",
     "rollup.config.js",
-    "**/*.spec.ts",
+    "src/*.spec.ts",
     "src/mock/*.{ts}"
   ]
 }
