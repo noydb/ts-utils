@@ -67,7 +67,7 @@ const areKeysValid = (firstKeysLength: number, firstKeys: string[], secondKeys: 
         return false;
     }
 
-    for (let i: number = 0 ; i < firstKeysLength ; i++) {
+    for (let i: number = 0; i < firstKeysLength; i++) {
         if (firstKeys[i] !== secondKeys[i]) {
             return false;
         }
@@ -77,7 +77,7 @@ const areKeysValid = (firstKeysLength: number, firstKeys: string[], secondKeys: 
 };
 
 const compareObjects = <T>(first: T, second: T, firstKeys: string[], firstKeysLength: number): boolean => {
-    for (let i: number = 0 ; i < firstKeysLength ; i++) {
+    for (let i: number = 0; i < firstKeysLength; i++) {
         const key: string = firstKeys[i];
         const firstValue: T = first[key];
         const secondValue: T = second[key];
@@ -159,10 +159,10 @@ export function areIdenticalArrays<T>(first: T[], second: T[]): boolean {
 }
 
 const buildMatcherList = <T>(array: T[], length: number): Matcher<T>[] => {
-    const list: Array<Matcher<T>> = [];
+    const list: Matcher<T>[] = [];
 
-    for (let i: number = 0 ; i < length ; i++) {
-        list.push({ object: array[i], isIdentical: false });
+    for (let i: number = 0; i < length; i++) {
+        list.push({object: array[i], isIdentical: false});
     }
 
     return list;
@@ -177,8 +177,8 @@ const buildMatcherList = <T>(array: T[], length: number): Matcher<T>[] => {
  * @param length for iteration & caching purposes.
  */
 const compareArrayElements = <T>(firstMatchers: Matcher<T>[], secondMatchers: Matcher<T>[], length: number): void => {
-    outer: for (let i: number = 0 ; i < length ; i++) {
-        for (let innerI: number = 0 ; i < length ; innerI++) {
+    outer: for (let i: number = 0; i < length; i++) {
+        for (let innerI: number = 0; i < length; innerI++) {
             const firstMatcher: Matcher<T> = firstMatchers[i];
             const secondMatcher: Matcher<T> = secondMatchers[innerI];
 
@@ -204,7 +204,7 @@ const compareArrayElements = <T>(firstMatchers: Matcher<T>[], secondMatchers: Ma
  * @param length for iteration & caching purposes.
  */
 const isMatcherValid = <T>(matchers: Matcher<T>[], length: number): boolean => {
-    for (let i: number = 0 ; i < length ; i++) {
+    for (let i: number = 0; i < length; i++) {
         if (!matchers[i].isIdentical) {
             return false;
         }

@@ -19,7 +19,7 @@ export class PersonGenerator {
     static get(noOfChildren: number = 0): Person {
         const person: Person = PersonGenerator.getFlat(0);
 
-        for (let i: number = 1 ; i <= noOfChildren ; i++) {
+        for (let i: number = 1; i <= noOfChildren; i++) {
             person.children?.push(PersonGenerator.getChild(i));
         }
 
@@ -43,7 +43,7 @@ export class PersonGenerator {
             firstName: `child first ${ count }`,
             lastName: `child last ${ count }`,
             address: {
-                streetName: `child streetNname ${ count }`
+                streetName: `child streetName ${ count }`
             },
             age: count,
             children: []

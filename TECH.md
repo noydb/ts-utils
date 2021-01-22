@@ -37,3 +37,5 @@ specified version (it is best not to be too strict when defining peer dependency
 - generics vs unknown (https://stackoverflow.com/a/51569726/8061089)
 - what is *.js.map
 - make it optional/a config to attach utils through augmentation
+- https://stackoverflow.com/questions/34361379/are-arrow-functions-and-functions-equivalent-interchangeable
+- ES lint vs TS lint

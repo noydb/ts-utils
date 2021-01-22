@@ -73,7 +73,7 @@ declare global {
          *
          * @param array to be cloned.
          */
-        clone(array: unknown[]): unknown[];
+        clone(array: T[]): T[];
 
         /**
          * Returns a [...spread] clone of the specified array and validates the
@@ -82,13 +82,14 @@ declare global {
          *
          * @param array to be cloned and validated.
          */
-        cloneWithValidation(array: unknown[]): unknown[];
+        cloneWithValidation(array: T[]): T[];
     }
 }
 
 /* IMPLEMENTATIONS */
+// use a regular function when using 'this', 'new', or arguments
 
-Array.prototype.first = function <T>(): T {
+Array.prototype.first = function<T>(): T {
     return this[0];
 };
 
@@ -96,29 +97,29 @@ Array.prototype.isEmpty = function(): boolean {
     return 0 === this.length;
 };
 
-Array.prototype.isIdenticalTo = function <T>(array: T[]): boolean {
+Array.prototype.isIdenticalTo = function<T>(array: T[]): boolean {
     return areIdenticalArrays(this, array);
 };
 
-Array.prototype.last = function <T>(): T {
+Array.prototype.last = function<T>(): T {
     return this.isEmpty() ? undefined : this[this.length - 1];
 };
 
-Array.prototype.longerThan = function <T>(array: T[]): boolean {
+Array.prototype.longerThan = function<T>(array: T[]): boolean {
     return this.length > array.length;
 };
 
-Array.prototype.shorterThan = function <T>(array: T[]): boolean {
+Array.prototype.shorterThan = function<T>(array: T[]): boolean {
     return this.length < array.length;
 };
 
-Array.prototype.clone = function(array: unknown[]): unknown[] {
+Array.prototype.clone = function<T>(array: T[]): T[] {
     // could this throw an error? what if undefined is passed in and returned?
     // undefined as Array<unknown> will surely break?
-    return clone(array) as Array<unknown>;
+    return clone(array) as T[];
 };
 
-Array.prototype.cloneWithValidation = function(array: unknown[]): unknown[] {
+Array.prototype.cloneWithValidation = function<T>(array: T[]): T[] {
     // same as above inline comment
-    return cloneWithValidation(array) as Array<unknown>;
+    return cloneWithValidation(array) as T[];
 };

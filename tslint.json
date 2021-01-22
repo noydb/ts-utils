@@ -23,6 +23,7 @@
         "trace"
       ]
     },
+    "only-arrow-functions": false,
     "typedef": [
       true,
       "call-signature",
