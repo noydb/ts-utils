@@ -22,21 +22,23 @@ $ npm install --save bp-ts-utils
 - `last(): T`
 - `longerThan(array: T[]): boolean`
 - `shorterThan(array: T[]): boolean`
-
-### [Array](src/array/array.util.ts)
-- `areIdenticalArrays(first: T[], second: T[]): boolean`
+- `clone(array: unknown[]): unknown[]`
+- `cloneWithValidation(array: unknown[]): unknown[]`
 
 ### [Boolean Global Augmentation](src/boolean/boolean.global.augmentation.ts)
 - `not(): boolean`
 
-Note: should this return `T` or `boolean`?
+### [Clone](src/clone/clone.util.ts)
+- `clone(argument: unknown | unknown[]): unknown | unknown[]`
+- `cloneWithValidation(argument: unknown | unknown[]): unknown | unknown[]`
 
 ### [Object](src/object/object.util.ts)
 - `areIdentical<T>(first: T, second: T): boolean`
-- `isUndefined<T>(argument: T): boolean`
-- `isNull<T>(argument: T): boolean`
-- `isNullOrUndefined<T>(argument: T): boolean`
+- `isUndefined(argument: unknown): boolean`
+- `isNull(argument: unknown): boolean`
+- `isNullOrUndefined(argument: unknown): boolean`
 - `isANumber(argument: unknown): boolean`
+- `areIdenticalArrays(first: T[], second: T[]): boolean`
 
 ## Releasing to NPM Registry
 - `npm run build`
@@ -49,16 +51,6 @@ Note: should this return `T` or `boolean`?
 - **lint**: `npm run lint`
 - **test**: `npm test`
 - **build**: `npm run build`
-
-## Discussions
-- Why rollup is being used
-- Wrapping functions in ObjectUtil 
-- exporting named/default functions 
-- Global augmentation
-- Will this library be compatible with all versions of TypeScript?   
-- generics vs unknown (https://stackoverflow.com/a/51569726/8061089).
-- what is *.js.map
-- make it optional to attach utils through augmentation
 
 ## Links
 - https://github.com/benj-power/ts-utils

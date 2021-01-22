@@ -1,3 +1,5 @@
+import { Matcher } from "../interface/matcher.interface";
+
 /**
  * Returns true if the values of the specified 'first' & 'second' argument are
  * identical - that is, similar in every detail; exactly like. Keys are ordered
@@ -209,10 +211,5 @@ const isMatcherValid = <T>(matchers: Matcher<T>[], length: number): boolean => {
 
     return true;
 };
-
-interface Matcher<T> {
-    object: T;
-    isIdentical: boolean;
-}
 
 /* array util end */
