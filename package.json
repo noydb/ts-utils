@@ -5,6 +5,7 @@
   "author": "banjo OBE",
   "license": "Apache-2.0",
   "repository": "github:benj-power/ts-utils",
+  "homepage": "https://github.com/benj-power/ts-utils#readme",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "engines": {
