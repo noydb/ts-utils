@@ -1,4 +1,4 @@
-name: ts-utils CI
+name: ts-utils-ci
 
 on:
   push:
