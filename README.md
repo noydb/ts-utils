@@ -2,13 +2,8 @@
 ![ts-utils-ci](https://github.com/benj-power/ts-utils/workflows/ts-utils-ci/badge.svg)
 
 # ts-utils
-A library of utilities to be used with TypeScript. I appreciate the established and efficacious utility
-libraries out there for both TypeScript and JavaScript so, I wanted to make something of a contribution. 
-This package will mostly remain unused by the public - with the majority of usage coming from my
-personal projects. I am not writing any groundbreaking utilities, so it follows that I find the
-following worthy of explicit mention: certain functions could be considered impractical and/or
-illogical; I am writing this library out of practice and merriment.
-
+A library of utilities to be used with TypeScript. The already established utility libraries out there for both TypeScript and JavaScript
+have inspired me to write my own. This is for fun and to learn. Anyone is welcome to try it out. 
 ## Installation
 Using npm:
 ```shell
