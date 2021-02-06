@@ -19,6 +19,16 @@ The biggest issue with Rollup is that it focuses on one thing: **creating produc
 is not much developer experience (apart from file watching and caching). It cannot produce development
 bundles, does not provide a web server, and only reads relative ES modules by default. 
 
+### ESM & CJS Usage in `rollup.config.js`
+**ESM**
+- Tree-shaking thanks to static module structure (https://exploringjs.com/es6/ch_modules.html#static-module-structure)
+- Easier to write
+- Asynchronous importing capabilities
+
+**CJS**
+- Cross build
+- Work on most environments - webpack, legacy apps
+
 ## package.json
 
 **dependencies**: critical for your library to work in production (lodash, etc)
