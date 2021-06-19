@@ -20,7 +20,7 @@ checks:
   identical-code:
     enabled: true
 exclude-patterns:
-  - "src/**/*.spec.ts"
+  - "**/*.spec.ts"
   - "node_modules/"
   - "src/mock/"
   - 'dist/'
