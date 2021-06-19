@@ -1,6 +1,5 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/0ca7640d58873389be60/maintainability)](https://codeclimate.com/github/benj-power/ts-utils/maintainability)
 ![ts-utils-ci](https://github.com/benj-power/ts-utils/workflows/ts-utils-ci/badge.svg)
-[![bp-ts-utils](https://snyk.io/advisor/npm-package/bp-ts-utils/badge.svg)](https://snyk.io/advisor/npm-package/bp-ts-utils)
 [![npm version](https://badge.fury.io/js/bp-ts-utils.svg)](https://badge.fury.io/js/bp-ts-utils)
 
 
