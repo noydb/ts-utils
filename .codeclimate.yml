@@ -1,5 +1,28 @@
-## other configuration excluded from example...
-exclude_patterns:
+checks:
+  argument-count:
+    enabled: true
+  complex-logic:
+    enabled: true
+  file-lines:
+    enabled: true
+  method-complexity:
+    enabled: true
+  method-count:
+    enabled: true
+  method-lines:
+    enabled: true
+  nested-control-flow:
+    enabled: true
+  return-statements:
+    enabled: true
+  similar-code:
+    enabled: false
+  identical-code:
+    enabled: true
+exclude-patterns:
   - "src/**/*.spec.ts"
   - "node_modules/"
   - "src/mock/"
+  - 'dist/'
+  - 'coverage/'
+  - '**/node_modules/'
